@@ -16,9 +16,9 @@
         >
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@drawable/Restaurant"
+            android:layout_width="160dp"
+            android:layout_height="140dp"
+            android:background="@drawable/imagen1"
             android:layout_gravity="center_horizontal"
             />
 
@@ -78,7 +78,9 @@
             android:textColor="#FFF"
             android:background="@drawable/button_background"
             android:layout_marginTop="8dp"
+
             />
+
 
     </LinearLayout>
 </ScrollView>
