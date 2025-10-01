@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:padding="16dp"
-
+    android:background="@color/ghost_white"
     >
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,22 +15,22 @@
         android:layout_gravity="center_vertical"
         >
 
-        <ImageView
-            android:layout_width="160dp"
-            android:layout_height="140dp"
-            android:background="@drawable/imagen1"
-            android:layout_gravity="center_horizontal"
-            />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Inicia Sesión"
+            android:text="Inicia sesión en GourmetGo"
             android:textStyle="bold"
             android:textSize="24dp"
             android:textColor="#000"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="12dp"
+            />
+
+        <ImageView
+            android:layout_width="160dp"
+            android:layout_height="140dp"
+            android:background="@drawable/logo"
+            android:layout_gravity="center_horizontal"
             />
 
         <EditText
@@ -70,17 +70,31 @@
             android:layout_marginTop="16dp"
             />
 
-        <Button
-            android:id="@+id/btnRegister"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Registrarse"
-            android:textColor="#FFF"
-            android:background="@drawable/button_background"
-            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            >
 
-            />
+            <TextView
+                android:id="@+id/textAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¿No tienes una cuenta?"
+                android:textColor="#000000"
+                />
 
-
+            <TextView
+                android:id="@+id/RegisterLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Registrate ahora."
+                android:textColor="#00796B"
+                android:clickable="true"
+                android:layout_marginStart="8dp"
+                />
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

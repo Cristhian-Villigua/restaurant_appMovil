@@ -8,7 +8,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
-
 class RegisterActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -21,32 +20,34 @@ class RegisterActivity: AppCompatActivity() {
         val Email: EditText = findViewById(R.id.Email)
         val Password: EditText = findViewById(R.id.Password)
         val btnRegister: Button = findViewById(R.id.btnRegister)
-        val btnLogin: TextView = findViewById(R.id.LoginLink)
+        val tvLoginLink: TextView = findViewById(R.id.LoginLink)
 
         btnRegister.setOnClickListener {
-            val Name = Name.text.toString()
-            val Lastname = Lastname.text.toString()
-            val Birthday = Birthday.text.toString()
-            val Phone = Phone.text.toString()
-            val Email = Email.text.toString()
-            val Password = Password.text.toString()
+            val name = Name.text.toString()
+            val lastname = Lastname.text.toString()
+            val birthday = Birthday.text.toString()
+            val phone = Phone.text.toString()
+            val email = Email.text.toString()
+            val password = Password.text.toString()
 
-            if(Name.isEmpty() || Lastname.isEmpty() || Birthday.isEmpty() || Phone.isEmpty() || Email.isEmpty() || Password.isEmpty()){
+            if(name.isEmpty() || lastname.isEmpty() || birthday.isEmpty() || phone.isEmpty() || email.isEmpty() || password.isEmpty()){
                 Toast.makeText(this, "Por favor complete los campos", Toast.LENGTH_SHORT).show()
             } else{
-                registerUser(Name,Lastname,Birthday,Phone,Email,Password)
+                registerUser(name, lastname, birthday, phone, email, password)
             }
         }
 
-        btnLogin.setOnClickListener {
+        tvLoginLink.setOnClickListener {
             val session = Intent(this, LoginActivity::class.java)
             startActivity(session)
+            finish()
         }
     }
+
     private fun registerUser(Name: String, Lastname: String, Birthday: String, Phone: String, Email: String, Password: String){
         Toast.makeText(this, "Usuario registrado: $Name $Lastname", Toast.LENGTH_SHORT).show()
 
-        val session = Intent(this, LoginActivity::class.java)
+        val session = Intent(this, MainActivity::class.java)
         startActivity(session)
     }
 }
