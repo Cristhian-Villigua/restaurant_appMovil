@@ -1,6 +1,8 @@
 package com.example.project_mobileapplicacion
 
+import android.app.DatePickerDialog
 import android.content.Intent
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -13,22 +15,32 @@ class RegisterActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        val Name: EditText = findViewById(R.id.Name)
-        val Lastname: EditText = findViewById(R.id.Lastname)
-        val Birthday: EditText = findViewById(R.id.Birthday)
-        val Phone: EditText = findViewById(R.id.Phone)
-        val Email: EditText = findViewById(R.id.Email)
-        val Password: EditText = findViewById(R.id.Password)
+        val name: EditText = findViewById(R.id.Name)
+        val lastname: EditText = findViewById(R.id.Lastname)
+        val birthday: EditText = findViewById(R.id.Birthday)
+        val phone: EditText = findViewById(R.id.Phone)
+        val email: EditText = findViewById(R.id.Email)
+        val password: EditText = findViewById(R.id.Password)
         val btnRegister: Button = findViewById(R.id.btnRegister)
         val tvLoginLink: TextView = findViewById(R.id.LoginLink)
 
+        birthday.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+            DatePickerDialog(this, { _, year1, month1, dayOfMonth ->
+                birthday.setText("$dayOfMonth/${month1 + 1}/$year1")
+            }, year, month, day).show()
+        }
         btnRegister.setOnClickListener {
-            val name = Name.text.toString()
-            val lastname = Lastname.text.toString()
-            val birthday = Birthday.text.toString()
-            val phone = Phone.text.toString()
-            val email = Email.text.toString()
-            val password = Password.text.toString()
+            val name = name.text.toString()
+            val lastname = lastname.text.toString()
+            val birthday = birthday.text.toString()
+            val phone = phone.text.toString()
+            val email = email.text.toString()
+            val password = password.text.toString()
 
             if(name.isEmpty() || lastname.isEmpty() || birthday.isEmpty() || phone.isEmpty() || email.isEmpty() || password.isEmpty()){
                 Toast.makeText(this, "Por favor complete los campos", Toast.LENGTH_SHORT).show()
@@ -44,8 +56,8 @@ class RegisterActivity: AppCompatActivity() {
         }
     }
 
-    private fun registerUser(Name: String, Lastname: String, Birthday: String, Phone: String, Email: String, Password: String){
-        Toast.makeText(this, "Usuario registrado: $Name $Lastname", Toast.LENGTH_SHORT).show()
+    private fun registerUser(name: String, lastname: String, birthday: String, phone: String, email: String, password: String){
+        Toast.makeText(this, "Usuario registrado: $name $lastname", Toast.LENGTH_SHORT).show()
 
         val session = Intent(this, MainActivity::class.java)
         startActivity(session)
