@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -34,19 +35,62 @@ class RegisterActivity: AppCompatActivity() {
                 birthday.setText("$dayOfMonth/${month1 + 1}/$year1")
             }, year, month, day).show()
         }
-        btnRegister.setOnClickListener {
-            val name = name.text.toString()
-            val lastname = lastname.text.toString()
-            val birthday = birthday.text.toString()
-            val phone = phone.text.toString()
-            val email = email.text.toString()
-            val password = password.text.toString()
 
-            if(name.isEmpty() || lastname.isEmpty() || birthday.isEmpty() || phone.isEmpty() || email.isEmpty() || password.isEmpty()){
-                Toast.makeText(this, "Por favor complete los campos", Toast.LENGTH_SHORT).show()
-            } else{
-                registerUser(name, lastname, birthday, phone, email, password)
+        btnRegister.setOnClickListener {
+            val nameStr = name.text.toString().trim()
+            val lastnameStr = lastname.text.toString().trim()
+            val birthdayStr = birthday.text.toString().trim()
+            val phoneStr = phone.text.toString().trim()
+            val emailStr = email.text.toString().trim()
+            val passwordStr = password.text.toString()
+
+            if (nameStr.isEmpty()) {
+                name.error = "El nombre es obligatorio"
+                name.requestFocus()
+                return@setOnClickListener
             }
+            if (!nameStr.matches(Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$"))) {
+                name.error = "El nombre solo puede contener letras"
+                name.requestFocus()
+                return@setOnClickListener
+            }
+
+            if (lastnameStr.isEmpty()) {
+                lastname.error = "El apellido es obligatorio"
+                lastname.requestFocus()
+                return@setOnClickListener
+            }
+            if (!lastnameStr.matches(Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$"))) {
+                lastname.error = "El apellido solo puede contener letras"
+                lastname.requestFocus()
+                return@setOnClickListener
+            }
+
+            if (birthdayStr.isEmpty()) {
+                birthday.error = "La fecha de nacimiento es obligatoria"
+                birthday.requestFocus()
+                return@setOnClickListener
+            }
+
+            if (!phoneStr.matches(Regex("^\\d{10}$"))) {
+                phone.error = "El teléfono debe tener 10 dígitos"
+                phone.requestFocus()
+                return@setOnClickListener
+            }
+
+            if (!Patterns.EMAIL_ADDRESS.matcher(emailStr).matches()) {
+                email.error = "Ingrese un correo válido"
+                email.requestFocus()
+                return@setOnClickListener
+            }
+
+            if (passwordStr.length < 8) {
+                password.error = "La contraseña debe tener al menos 8 caracteres"
+                password.requestFocus()
+                return@setOnClickListener
+            }
+
+            registerUser(nameStr, lastnameStr, birthdayStr, phoneStr, emailStr, passwordStr)
         }
 
         tvLoginLink.setOnClickListener {
