@@ -59,7 +59,7 @@ class RegisterActivity: AppCompatActivity() {
     private fun registerUser(name: String, lastname: String, birthday: String, phone: String, email: String, password: String){
         Toast.makeText(this, "Usuario registrado: $name $lastname", Toast.LENGTH_SHORT).show()
 
-        val session = Intent(this, MainActivity::class.java)
+        val session = Intent(this, LoginActivity::class.java)
         startActivity(session)
     }
 }
