@@ -13,14 +13,15 @@ class LoginActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val Email : EditText = findViewById(R.id.Email)
-        val Password : EditText = findViewById(R.id.Password)
+        val email : EditText = findViewById(R.id.Email)
+        val password : EditText = findViewById(R.id.Password)
         val btnLogin : Button = findViewById(R.id.btnLogin)
-        val tvRegisterLink : TextView = findViewById(R.id.RegisterLink)
+        val btnRegister : TextView = findViewById(R.id.RegisterLink)
+        val btnGuest = findViewById<TextView>(R.id.btnGuest)
 
         btnLogin.setOnClickListener {
-            val email = Email.text.toString()
-            val password = Password.text.toString()
+            val email = email.text.toString()
+            val password = password.text.toString()
 
             if(email.isEmpty() || password.isEmpty()){
                 Toast.makeText(this, "Por favor ingrese su correo y contraseña", Toast.LENGTH_SHORT).show()
@@ -29,12 +30,16 @@ class LoginActivity: AppCompatActivity() {
             }
         }
 
-        tvRegisterLink.setOnClickListener {
+        btnRegister.setOnClickListener {
             val session = Intent(this, RegisterActivity::class.java)
             startActivity(session)
             finish()
         }
 
+        btnGuest.setOnClickListener {
+            val session = Intent(this, MainActivity::class.java)
+            startActivity(session)
+        }
     }
     private fun loginUser(email: String, password: String) {
         Toast.makeText(this, "¡Bienvenido! Sesión iniciada.", Toast.LENGTH_SHORT).show()

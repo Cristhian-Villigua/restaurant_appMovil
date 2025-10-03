@@ -18,7 +18,7 @@ class SplashActivity : AppCompatActivity() {
         Handler().postDelayed({
             val userLoggedIn = true
             val intent = if (userLoggedIn) {
-                Intent(this, MainActivity::class.java)
+                Intent(this, LoginActivity::class.java)
             } else {
                 Intent(this, RegisterActivity::class.java)
             }
