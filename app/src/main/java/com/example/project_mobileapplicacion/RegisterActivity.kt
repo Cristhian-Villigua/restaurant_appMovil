@@ -2,14 +2,11 @@ package com.example.project_mobileapplicacion
 
 import android.app.DatePickerDialog
 import android.content.Intent
-import android.icu.util.Calendar
 import android.os.Bundle
 import android.util.Patterns
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import java.util.Calendar
 
 class RegisterActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?){
@@ -31,9 +28,18 @@ class RegisterActivity: AppCompatActivity() {
             val month = calendar.get(Calendar.MONTH)
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-            DatePickerDialog(this, { _, year1, month1, dayOfMonth ->
-                birthday.setText("$dayOfMonth/${month1 + 1}/$year1")
-            }, year, month, day).show()
+            val datePickerDialog = DatePickerDialog(
+                this,
+                R.style.SpinnerDatePicker,
+                { _, selectedYear, selectedMonth, selectedDay ->
+                    val formattedDate = String.format("%02d/%02d/%04d", selectedDay, selectedMonth + 1, selectedYear)
+                    birthday.setText(formattedDate)
+                },
+                year,
+                month,
+                day
+            )
+            datePickerDialog.show()
         }
 
         btnRegister.setOnClickListener {
@@ -49,6 +55,11 @@ class RegisterActivity: AppCompatActivity() {
                 name.requestFocus()
                 return@setOnClickListener
             }
+            if (nameStr.length < 2 || nameStr.length > 50) {
+                name.error = "El nombre debe tener entre 2 y 50 caracteres"
+                name.requestFocus()
+                return@setOnClickListener
+            }
             if (!nameStr.matches(Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$"))) {
                 name.error = "El nombre solo puede contener letras"
                 name.requestFocus()
@@ -57,6 +68,11 @@ class RegisterActivity: AppCompatActivity() {
 
             if (lastnameStr.isEmpty()) {
                 lastname.error = "El apellido es obligatorio"
+                lastname.requestFocus()
+                return@setOnClickListener
+            }
+            if (lastnameStr.length < 2 || lastnameStr.length > 50) {
+                lastname.error = "El apellido debe tener entre 2 y 50 caracteres"
                 lastname.requestFocus()
                 return@setOnClickListener
             }
@@ -78,6 +94,11 @@ class RegisterActivity: AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            if (emailStr.isEmpty() || emailStr.length > 100) {
+                email.error = "El correo debe tener máximo 100 caracteres"
+                email.requestFocus()
+                return@setOnClickListener
+            }
             if (!Patterns.EMAIL_ADDRESS.matcher(emailStr).matches()) {
                 email.error = "Ingrese un correo válido"
                 email.requestFocus()
@@ -86,6 +107,11 @@ class RegisterActivity: AppCompatActivity() {
 
             if (passwordStr.length < 8) {
                 password.error = "La contraseña debe tener al menos 8 caracteres"
+                password.requestFocus()
+                return@setOnClickListener
+            }
+            if (passwordStr.length > 20) {
+                password.error = "La contraseña no puede superar 20 caracteres"
                 password.requestFocus()
                 return@setOnClickListener
             }
@@ -107,3 +133,4 @@ class RegisterActivity: AppCompatActivity() {
         startActivity(session)
     }
 }
+

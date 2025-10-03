@@ -43,6 +43,7 @@
             android:textSize="16sp"
             android:hint="Nombres"
             android:layout_marginTop="8dp"
+            android:singleLine="true"
             />
 
         <EditText
@@ -56,6 +57,7 @@
             android:textColor="#000"
             android:textSize="16sp"
             android:layout_marginTop="8dp"
+            android:singleLine="true"
             />
 
         <EditText
@@ -69,20 +71,21 @@
             android:padding="12dp"
             android:textColor="#000"
             android:textSize="16sp"
-            android:layout_marginTop="8dp"
-            />
+            android:layout_marginTop="8dp"/>
+
 
         <EditText
             android:id="@+id/Phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Teléfono"
-            android:inputType="phone"
+            android:inputType="number"
             android:background="@drawable/edit_text_background"
             android:padding="12dp"
             android:textColor="#000"
             android:textSize="16sp"
             android:layout_marginTop="8dp"
+            android:singleLine="true"
             />
 
         <EditText
@@ -96,6 +99,7 @@
             android:textColor="#000"
             android:textSize="16sp"
             android:layout_marginTop="8dp"
+            android:singleLine="true"
             />
 
         <EditText
