@@ -6,10 +6,6 @@ import android.os.Bundle
 import android.util.Patterns
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import com.example.project_mobileapplicacion.database.AppDataBase
-import com.example.project_mobileapplicacion.model.UserEntity
-import kotlinx.coroutines.launch
 import java.util.Calendar
 
 class RegisterActivity: AppCompatActivity() {
@@ -131,29 +127,10 @@ class RegisterActivity: AppCompatActivity() {
     }
 
     private fun registerUser(name: String, lastname: String, birthday: String, phone: String, email: String, password: String){
-        val db = AppDataBase.getInstance(applicationContext)
-        val userDao = db.userDao()
+        Toast.makeText(this, "Usuario registrado: $name $lastname", Toast.LENGTH_SHORT).show()
 
-        val userEntity = UserEntity(
-            name = name,
-            lastname = lastname,
-            birthday = birthday,
-            phone = phone,
-            email = email,
-            password = password
-        )
-        lifecycleScope.launch {
-            try {
-                userDao.insert(userEntity)
-                Toast.makeText(this@RegisterActivity, "Usuario registrado exitosamente", Toast.LENGTH_SHORT).show()
-            } catch (e: Exception) {
-                Toast.makeText(this@RegisterActivity, "Error al registrar usuario: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
-            val session = Intent(this@RegisterActivity, LoginActivity::class.java)
-            startActivity(session)
-            finish()
-        }
-
+        val session = Intent(this, LoginActivity::class.java)
+        startActivity(session)
     }
 }
 
