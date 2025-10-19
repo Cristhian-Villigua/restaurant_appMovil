@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "706986535911",
+    "project_id": "gourmertgo",
+    "storage_bucket": "gourmertgo.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:706986535911:android:dfb280d7ae067db2f06b42",
+        "android_client_info": {
+          "package_name": "com.example.project_mobileapplicacion"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoUiM_C_j0u7nl2lm_IkQ5UTaQ4vF_px0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

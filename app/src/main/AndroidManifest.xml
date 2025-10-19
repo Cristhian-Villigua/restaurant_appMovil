@@ -23,16 +23,21 @@
 
         <activity
             android:name=".MainActivity"
-            android:exported="true" />
+            android:exported="false" />
+
         <activity
-            android:name=".LoginActivity"
-            android:exported="true"
+            android:name=".ListActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Auth.LoginActivity"
+            android:exported="false"
             android:windowSoftInputMode="adjustResize"
             />
 
         <activity
-            android:name=".RegisterActivity"
-            android:exported="true"
+            android:name=".Auth.RegisterActivity"
+            android:exported="false"
             android:windowSoftInputMode="adjustResize"
             />
 

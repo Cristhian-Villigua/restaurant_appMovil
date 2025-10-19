@@ -1,12 +1,17 @@
-package com.example.project_mobileapplicacion
+package com.example.project_mobileapplicacion.Auth
 
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.project_mobileapplicacion.R
+import com.example.project_mobileapplicacion.cloud.FirebaseService
 import com.example.project_mobileapplicacion.database.AppDataBase
 import com.example.project_mobileapplicacion.model.UserEntity
 import kotlinx.coroutines.launch
@@ -131,7 +136,7 @@ class RegisterActivity: AppCompatActivity() {
     }
 
     private fun registerUser(name: String, lastname: String, birthday: String, phone: String, email: String, password: String){
-        val db = AppDataBase.getInstance(applicationContext)
+        val db = AppDataBase.Companion.getInstance(applicationContext)
         val userDao = db.userDao()
 
         val userEntity = UserEntity(
@@ -145,6 +150,7 @@ class RegisterActivity: AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 userDao.insert(userEntity)
+                FirebaseService.store(userEntity)
                 Toast.makeText(this@RegisterActivity, "Usuario registrado exitosamente", Toast.LENGTH_SHORT).show()
             } catch (e: Exception) {
                 Toast.makeText(this@RegisterActivity, "Error al registrar usuario: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -156,4 +162,3 @@ class RegisterActivity: AppCompatActivity() {
 
     }
 }
-
