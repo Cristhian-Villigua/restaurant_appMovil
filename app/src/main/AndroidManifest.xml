@@ -26,17 +26,25 @@
             android:exported="false" />
 
         <activity
-            android:name=".ListActivity"
+            android:name=".admin.ListActivity"
             android:exported="false" />
 
         <activity
-            android:name=".Auth.LoginActivity"
+            android:name=".admin.IndexActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".admin.ProfileActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".auth.LoginActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize"
             />
 
         <activity
-            android:name=".Auth.RegisterActivity"
+            android:name=".auth.RegisterActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize"
             />

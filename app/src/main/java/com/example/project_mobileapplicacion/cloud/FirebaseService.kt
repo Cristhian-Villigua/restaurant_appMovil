@@ -42,4 +42,53 @@ object FirebaseService {
             callback(emptyList())
         }
     }
+    fun getByEmail(email: String, callback: (UserEntity?) -> Unit) {
+        db.collection("users")
+            .whereEqualTo("email", email)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (documents.isEmpty) {
+                    callback(null)
+                } else {
+                    for (document in documents) {
+                        val user = UserEntity(
+                            id = 0,
+                            name = document.getString("name") ?: "",
+                            lastname = document.getString("lastname") ?: "",
+                            birthday = document.getString("birthday") ?: "",
+                            phone = document.getString("phone") ?: "",
+                            email = document.getString("email") ?: "",
+                            password = document.getString("password") ?: ""
+                        )
+                        callback(user)
+                    }
+                }
+            }
+            .addOnFailureListener { exception ->
+                callback(null)
+            }
+    }
+    fun update(user: UserEntity) {
+        db.collection("users").document(user.id.toString())
+            .update(
+                "name", user.name,
+                "lastname", user.lastname,
+                "birthday", user.birthday,
+                "phone", user.phone,
+                "email", user.email,
+                "password", user.password
+            ).addOnSuccessListener {
+                Log.d("FirebaseService", "User successfully updated")
+            }.addOnFailureListener {
+                Log.e("FirebaseService", "Error updating user")
+            }
+    }
+    fun delete(userId: String){
+        db.collection("users").document(userId).delete()
+            .addOnSuccessListener {
+                Log.d("FirebaseService", "User successfully deleted")
+            }.addOnFailureListener { e->
+                Log.e("FirebaseService", "Error deleting user", e)
+            }
+    }
 }

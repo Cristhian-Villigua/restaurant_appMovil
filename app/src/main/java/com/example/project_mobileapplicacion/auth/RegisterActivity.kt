@@ -1,4 +1,4 @@
-package com.example.project_mobileapplicacion.Auth
+package com.example.project_mobileapplicacion.auth
 
 import android.app.DatePickerDialog
 import android.content.Intent
@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.project_mobileapplicacion.auth.LoginActivity
 import com.example.project_mobileapplicacion.R
 import com.example.project_mobileapplicacion.cloud.FirebaseService
 import com.example.project_mobileapplicacion.database.AppDataBase

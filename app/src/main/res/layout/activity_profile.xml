@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5EDF7">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:background="?android:attr/colorPrimary"
+        android:gravity="center_vertical"
+        >
+
+        <ImageView
+            android:id="@+id/logoImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/logo"
+            android:contentDescription="Logo de la página"
+            android:layout_marginEnd="16dp"
+            />
+
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="GoumertGo"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:gravity="center"
+            />
+
+        <ImageView
+            android:id="@+id/logoutIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/logout"
+            android:contentDescription="Cerrar sesión"
+            android:clickable="true"
+            android:focusable="true"
+            />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/editName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_background"
+                android:text="Nombre: "
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:padding="12dp"
+                />
+
+            <TextView
+                android:id="@+id/editLastname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Apellido: "
+                android:textSize="16sp"
+                android:background="@drawable/edit_text_background"
+                android:layout_marginTop="8dp"
+                android:padding="12dp"
+                />
+
+            <TextView
+                android:id="@+id/editBirthday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fecha de nacimiento: "
+                android:textSize="16sp"
+                android:background="@drawable/edit_text_background"
+                android:layout_marginTop="8dp"
+                android:padding="12dp"
+                />
+
+            <TextView
+                android:id="@+id/editPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Teléfono: "
+                android:textSize="16sp"
+                android:background="@drawable/edit_text_background"
+                android:layout_marginTop="8dp"
+                android:padding="12dp"
+                />
+
+            <TextView
+                android:id="@+id/editEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Correo electrónico: "
+                android:textSize="16sp"
+                android:background="@drawable/edit_text_background"
+                android:layout_marginTop="8dp"
+                android:padding="12dp"
+                />
+
+
+            <Button
+                android:id="@+id/updateProfileButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Actualizar Perfil"
+                android:layout_marginTop="24dp"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

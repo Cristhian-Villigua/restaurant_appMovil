@@ -1,4 +1,4 @@
-package com.example.project_mobileapplicacion
+package com.example.project_mobileapplicacion.admin
 
 import android.os.Bundle
 import android.widget.Button
@@ -8,7 +8,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.project_mobileapplicacion.Adapter.UserAdapter
+import com.example.project_mobileapplicacion.R
+import com.example.project_mobileapplicacion.adapter.UserAdapter
 import com.example.project_mobileapplicacion.cloud.FirebaseService
 import com.example.project_mobileapplicacion.database.AppDataBase
 import kotlinx.coroutines.flow.collectLatest
@@ -32,7 +33,7 @@ class ListActivity : AppCompatActivity() {
         btnRoom = findViewById(R.id.btnRoom)
         btnFirebase = findViewById(R.id.btnFirebase)
 
-        val db = AppDataBase.getInstance(this).userDao()
+        val db = AppDataBase.Companion.getInstance(this).userDao()
 
         btnRoom.setOnClickListener {
             lifecycleScope.launch {

@@ -1,4 +1,4 @@
-package com.example.project_mobileapplicacion.Auth
+package com.example.project_mobileapplicacion.auth
 
 import android.content.Intent
 import android.os.Bundle
@@ -19,9 +19,8 @@ class LoginActivity: AppCompatActivity() {
         val email : EditText = findViewById(R.id.Email)
         val password : EditText = findViewById(R.id.Password)
         val btnLogin : Button = findViewById(R.id.btnLogin)
-        val btnRegister : TextView = findViewById(R.id.RegisterLink)
+        val btnRegister = findViewById<TextView>(R.id.RegisterLink)
         val btnGuest = findViewById<TextView>(R.id.btnGuest)
-
 
         btnLogin.setOnClickListener {
             val email = email.text.toString()
@@ -34,23 +33,19 @@ class LoginActivity: AppCompatActivity() {
             }
         }
 
-        btnRegister.setOnClickListener {
-            val session = Intent(this, RegisterActivity::class.java)
-            startActivity(session)
-            finish()
-        }
-
         btnGuest.setOnClickListener {
             val session = Intent(this, MainActivity::class.java)
             startActivity(session)
         }
+
+        btnRegister.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
+            finish()
+        }
     }
     fun loginUser(email: String, password: String) {
         val db = FirebaseFirestore.getInstance()
-
-        db.collection("users")
-            .whereEqualTo("email", email)
-            .get()
+        db.collection("users").whereEqualTo("email", email).get()
             .addOnSuccessListener { documents ->
                 if (documents.isEmpty) {
                     Toast.makeText(this@LoginActivity, "Correo no encontrado", Toast.LENGTH_SHORT).show()
@@ -59,6 +54,11 @@ class LoginActivity: AppCompatActivity() {
                         val storedPassword = document.getString("password")
                         if (storedPassword == password) {
                             Toast.makeText(this@LoginActivity, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
+                            val userPrefs = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+                            with(userPrefs.edit()) {
+                                putString("userEmail", email)
+                                apply()
+                            }
                             val intent = Intent(this@LoginActivity, MainActivity::class.java)
                             startActivity(intent)
                             finish()
