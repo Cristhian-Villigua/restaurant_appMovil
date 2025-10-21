@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey
 data class UserEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
+    var docId: String? = null, // Campo para el ID del documento de Firebase
     val name: String,
     val lastname: String,
     val birthday: String,

@@ -27,7 +27,7 @@ object FirebaseService {
         db.collection("users").get().addOnSuccessListener { result->
             val list = result.map { doc->
                 UserEntity(
-                    id = 0,
+                    docId = doc.id,
                     name = doc.getString("name") ?: "",
                     lastname = doc.getString("lastname") ?: "",
                     birthday = doc.getString("birthday") ?: "",
@@ -52,7 +52,7 @@ object FirebaseService {
                 } else {
                     for (document in documents) {
                         val user = UserEntity(
-                            id = 0,
+                            docId = document.id,
                             name = document.getString("name") ?: "",
                             lastname = document.getString("lastname") ?: "",
                             birthday = document.getString("birthday") ?: "",
@@ -69,19 +69,21 @@ object FirebaseService {
             }
     }
     fun update(user: UserEntity) {
-        db.collection("users").document(user.id.toString())
-            .update(
-                "name", user.name,
-                "lastname", user.lastname,
-                "birthday", user.birthday,
-                "phone", user.phone,
-                "email", user.email,
-                "password", user.password
-            ).addOnSuccessListener {
-                Log.d("FirebaseService", "User successfully updated")
-            }.addOnFailureListener {
-                Log.e("FirebaseService", "Error updating user")
-            }
+        user.docId?.let {
+            db.collection("users").document(it)
+                .update(
+                    "name", user.name,
+                    "lastname", user.lastname,
+                    "birthday", user.birthday,
+                    "phone", user.phone,
+                    "email", user.email,
+                    "password", user.password
+                ).addOnSuccessListener {
+                    Log.d("FirebaseService", "User successfully updated")
+                }.addOnFailureListener {
+                    Log.e("FirebaseService", "Error updating user")
+                }
+        }
     }
     fun delete(userId: String){
         db.collection("users").document(userId).delete()
