@@ -38,6 +38,10 @@
             android:exported="false" />
 
         <activity
+            android:name=".admin.UpdateProfileActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".auth.LoginActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize"

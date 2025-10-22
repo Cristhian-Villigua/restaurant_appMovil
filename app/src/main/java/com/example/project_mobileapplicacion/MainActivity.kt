@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         val btnVerRegister = findViewById<Button>(R.id.btnVerRegister)
         val btnAdmin = findViewById<Button>(R.id.btnAdmin)
-        val btnUpdateProfile = findViewById<Button>(R.id.btnUpdateProfile)
+
 
         btnVerRegister.setOnClickListener {
             startActivity(Intent(this, ListActivity::class.java))
@@ -28,10 +28,6 @@ class MainActivity : AppCompatActivity() {
 
         btnAdmin.setOnClickListener {
             startActivity(Intent(this, IndexActivity::class.java))
-        }
-
-        btnUpdateProfile.setOnClickListener {
-            startActivity(Intent(this, UpdateProfileActivity::class.java))
         }
 
     }
