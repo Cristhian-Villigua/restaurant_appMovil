@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ghost_white">#F8F8FF</color>
+    <!-- General -->
+    <color name="golden_yellow">#FFC529</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#0919C8</color>
+    <color name="light_gray">#D7D7D7</color>
+
+    <!-- theme light -->
+    <color name="ghost_white">#F8F8FF</color>
+    <color name="red_secondary">#E53935</color>
+    <color name="red_primary">#FF6F61</color>
+    <color name="white_base">#FFFFFF</color>
+    <color name="black_text">#212121</color>
+
+    <!-- theme night -->
+    <color name="gray_dark">#262626</color>
+    <color name="red_primary_dark">#FF5252</color>
+    <color name="red_secondary_dark">#D32F2F</color>
+    <color name="white_text">#F5F5F5</color>
+    <color name="black_base">#121212</color>
+
 </resources>

@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#F5EDF7">
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,28 +11,26 @@
         android:orientation="horizontal"
         android:padding="16dp"
         android:background="?android:attr/colorPrimary"
-        android:gravity="center_vertical"
-        >
+        android:gravity="center_vertical" >
 
         <ImageView
             android:id="@+id/logoImage"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/logo"
-            android:contentDescription="Logo de la página"
-            android:layout_marginEnd="16dp"
-            />
+            android:background="@drawable/logo"
+            android:contentDescription="@string/app_name"
+            android:layout_gravity="center_horizontal" />
 
         <TextView
             android:id="@+id/userName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="GoumertGo"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:gravity="center"
-            />
+            android:text="@string/app_name"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="?attr/colorOnSurface"
+            android:gravity="center" />
 
         <ImageView
             android:id="@+id/logoutIcon"
@@ -42,21 +39,18 @@
             android:src="@drawable/logout"
             android:contentDescription="Cerrar sesión"
             android:clickable="true"
-            android:focusable="true"
-            />
-    </LinearLayout>
+            android:focusable="true" />
 
+    </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
-        >
+        android:padding="16dp" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/editName"
@@ -64,66 +58,63 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/edit_text_background"
                 android:text="Nombre: "
+                android:textColor="?attr/colorOnSurface"
                 android:textSize="16sp"
                 android:layout_marginTop="8dp"
-                android:padding="12dp"
-                />
+                android:padding="12dp" />
 
             <TextView
                 android:id="@+id/editLastname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Apellido: "
+                android:textColor="?attr/colorOnSurface"
                 android:textSize="16sp"
                 android:background="@drawable/edit_text_background"
                 android:layout_marginTop="8dp"
-                android:padding="12dp"
-                />
+                android:padding="12dp" />
 
             <TextView
                 android:id="@+id/editBirthday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Fecha de nacimiento: "
+                android:textColor="?attr/colorOnSurface"
                 android:textSize="16sp"
                 android:background="@drawable/edit_text_background"
                 android:layout_marginTop="8dp"
-                android:padding="12dp"
-                />
+                android:padding="12dp" />
 
             <TextView
                 android:id="@+id/editPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Teléfono: "
+                android:textColor="?attr/colorOnSurface"
                 android:textSize="16sp"
                 android:background="@drawable/edit_text_background"
                 android:layout_marginTop="8dp"
-                android:padding="12dp"
-                />
+                android:padding="12dp" />
 
             <TextView
                 android:id="@+id/editEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Correo electrónico: "
+                android:textColor="?attr/colorOnSurface"
                 android:textSize="16sp"
                 android:background="@drawable/edit_text_background"
                 android:layout_marginTop="8dp"
-                android:padding="12dp"
-                />
-
+                android:padding="12dp" />
 
             <Button
                 android:id="@+id/btnUpdate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Actualizar Perfil"
-                android:layout_marginTop="24dp"
-                />
+                android:textColor="?attr/colorOnSurface"
+                android:layout_marginTop="24dp" />
 
         </LinearLayout>
-
     </ScrollView>
-
 </LinearLayout>

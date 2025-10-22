@@ -1,8 +1,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.ProjectMobileApplicacion" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Barra de estado -->
+        <!-- <item name="android:statusBarColor">@color/golden_yellow</item> -->
+        <item name="android:windowLightStatusBar">@color/black</item>
+        <item name="colorPrimary">@color/red_primary</item>
+        <item name="colorSecondary">@color/red_secondary</item>
+        <!-- Fondo -->
+        <item name="android:windowBackground">@color/white_base</item>
+        <!-- Colores de superficie (cards, EditText, botones) -->
+        <item name="colorSurface">@color/white_base</item>
+        <!-- Color de hint en EditText -->
+        <item name="colorOnSurfaceVariant">@color/light_gray</item>
+        <!-- Color del texto sobre la superficie -->
+        <item name="colorOnSurface">@color/black_text</item>
     </style>
 
     <style name="Theme.ProjectMobileApplicacion" parent="Base.Theme.ProjectMobileApplicacion" />

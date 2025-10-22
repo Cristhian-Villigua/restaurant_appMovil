@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F5EDF7"
     tools:context=".admin.UpdateProfileActivity">
 
     <LinearLayout
@@ -18,22 +17,21 @@
         >
 
         <ImageView
-            android:id="@+id/logoImage"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/logo"
-            android:contentDescription="Logo de la página"
-            android:layout_marginEnd="16dp"
-            />
+            android:background="@drawable/logo"
+            android:contentDescription="@string/app_name"
+            android:layout_gravity="center_horizontal" />
 
         <TextView
             android:id="@+id/userName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="GoumertGo"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
+            android:text="@string/app_name"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="?attr/colorOnSurface"
             android:gravity="center"
             />
 
@@ -63,9 +61,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Update Profile"
+                android:text="Actualizar perfil"
                 android:textSize="24sp"
                 android:textStyle="bold"
+                android:textColor="?attr/colorOnSurface"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="16dp"
                 />
@@ -76,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Name"
                 android:padding="12dp"
-                android:textColor="#000"
+                android:textColor="?attr/colorOnSurface"
                 android:textSize="16sp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/edit_text_background"
@@ -88,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Lastname"
                 android:padding="12dp"
-                android:textColor="#000"
+                android:textColor="?attr/colorOnSurface"
                 android:textSize="16sp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/edit_text_background"
@@ -100,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Birthday"
                 android:padding="12dp"
-                android:textColor="#000"
+                android:textColor="?attr/colorOnSurface"
                 android:textSize="16sp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/edit_text_background"
@@ -112,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Phone"
                 android:padding="12dp"
-                android:textColor="#000"
+                android:textColor="?attr/colorOnSurface"
                 android:textSize="16sp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/edit_text_background"
@@ -124,7 +123,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Email"
                 android:padding="12dp"
-                android:textColor="#000"
+                android:textColor="?attr/colorOnSurface"
                 android:textSize="16sp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/edit_text_background"
@@ -134,7 +133,10 @@
                 android:id="@+id/btnUpdate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Update"
+                android:text="Actualizar"
+                android:textStyle="bold"
+                android:textColor="?attr/colorOnSurface"
+                android:background="@drawable/button_background"
                 android:layout_marginTop="8dp"
                 />
 

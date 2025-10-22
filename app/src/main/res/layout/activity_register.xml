@@ -3,9 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:paddingBottom="50dp"
-    android:background="@color/ghost_white"
-    >
+    android:paddingBottom="50dp" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,38 +11,47 @@
         android:orientation="vertical"
         android:padding="24dp"
         android:gravity="center_horizontal"
-        android:layout_gravity="center_vertical"
-        >
+        android:layout_gravity="center_vertical" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Registrarse en GourmetGo"
+            android:text="Registrarse"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="#000"
+            android:textColor="?attr/colorOnSurface"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="12dp"
-            />
+            android:layout_marginBottom="12dp" />
+
         <ImageView
             android:layout_width="160dp"
             android:layout_height="140dp"
             android:background="@drawable/logo"
-            android:layout_gravity="center_horizontal"
-            />
+            android:contentDescription="@string/app_name"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginTop="-35dp"
+            android:layout_marginBottom="12dp"
+            android:textColor="?attr/colorOnSurface"
+            android:gravity="center" />
 
         <EditText
             android:id="@+id/Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Nombres"
             android:background="@drawable/edit_text_background"
             android:padding="12dp"
-            android:textColor="#000"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="16sp"
-            android:hint="Nombres"
             android:layout_marginTop="8dp"
-            android:singleLine="true"
-            />
+            android:singleLine="true" />
 
         <EditText
             android:id="@+id/Lastname"
@@ -54,11 +61,10 @@
             android:hint="Apellidos"
             android:background="@drawable/edit_text_background"
             android:padding="12dp"
-            android:textColor="#000"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="16sp"
             android:layout_marginTop="8dp"
-            android:singleLine="true"
-            />
+            android:singleLine="true" />
 
         <EditText
             android:id="@+id/Birthday"
@@ -69,7 +75,7 @@
             android:clickable="true"
             android:background="@drawable/edit_text_background"
             android:padding="12dp"
-            android:textColor="#000"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="16sp"
             android:layout_marginTop="8dp"/>
 
@@ -79,14 +85,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Teléfono"
-            android:inputType="number"
+            android:inputType="phone"
             android:background="@drawable/edit_text_background"
             android:padding="12dp"
-            android:textColor="#000"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="16sp"
             android:layout_marginTop="8dp"
-            android:singleLine="true"
-            />
+            android:singleLine="true" />
 
         <EditText
             android:id="@+id/Email"
@@ -96,62 +101,56 @@
             android:inputType="textEmailAddress"
             android:background="@drawable/edit_text_background"
             android:padding="12dp"
-            android:textColor="#000"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="16sp"
             android:layout_marginTop="8dp"
-            android:singleLine="true"
-            />
+            android:singleLine="true" />
 
         <EditText
             android:id="@+id/Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:hint="Password"
+            android:hint="Contraseña"
             android:background="@drawable/edit_text_background"
             android:padding="12dp"
-            android:textColor="#000"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="16sp"
-            android:layout_marginTop="8dp"
-            />
+            android:layout_marginTop="8dp" />
 
         <Button
             android:id="@+id/btnRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Registrar"
-            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:textColor="?attr/colorOnSurface"
             android:background="@drawable/button_background"
-            android:layout_marginTop="16dp"
-            />
+            android:layout_marginTop="16dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginTop="16dp"
-            >
+            android:layout_marginTop="16dp">
 
             <TextView
                 android:id="@+id/textAccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="¿Ya tienes una cuenta?"
-                android:textColor="#000000"
-
-                />
+                android:textColor="?attr/colorOnSurface" />
 
             <TextView
                 android:id="@+id/LoginLink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Inicia sesión"
-                android:textColor="#00796B"
+                android:textColor="?attr/colorSecondary"
                 android:clickable="true"
-                android:layout_marginStart="8dp"
-                />
-        </LinearLayout>
+                android:layout_marginStart="8dp" />
 
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>
