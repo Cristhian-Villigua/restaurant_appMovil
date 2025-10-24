@@ -1,22 +1,29 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.ProjectMobileApplicacion" parent="Theme.Material3.DayNight.NoActionBar">
+    <!-- Base application theme (fijo en modo claro) -->
+    <style name="Base.Theme.ProjectMobileApplicacion" parent="Theme.Material3.Light.NoActionBar">
         <!-- Barra de estado -->
         <!-- <item name="android:statusBarColor">@color/golden_yellow</item> -->
-        <item name="android:windowLightStatusBar">@color/black</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!-- Colores principales -->
         <item name="colorPrimary">@color/red_primary</item>
         <item name="colorSecondary">@color/red_secondary</item>
-        <!-- Fondo -->
+
+        <!-- Fondo general -->
         <item name="android:windowBackground">@color/white_base</item>
-        <!-- Colores de superficie (cards, EditText, botones) -->
+
+        <!-- Colores de superficie -->
         <item name="colorSurface">@color/white_base</item>
-        <!-- Color de hint en EditText -->
+
+        <!-- Hint y textos -->
         <item name="colorOnSurfaceVariant">@color/light_gray</item>
-        <!-- Color del texto sobre la superficie -->
         <item name="colorOnSurface">@color/black_text</item>
     </style>
 
+    <!-- Tema principal de la app -->
     <style name="Theme.ProjectMobileApplicacion" parent="Base.Theme.ProjectMobileApplicacion" />
+
+    <!-- Estilo del Spinner con modo claro -->
     <style name="SpinnerDatePicker" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:datePickerStyle">@style/SpinnerDatePickerStyle</item>
     </style>
@@ -25,6 +32,14 @@
         <item name="android:datePickerMode">spinner</item>
         <item name="android:calendarViewShown">false</item>
         <item name="android:spinnersShown">true</item>
+    </style>
+    <style name="Theme.Splash" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Fondo blanco fijo -->
+        <item name="android:windowBackground">@color/white_base</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!-- Desactiva animaciones mientras carga -->
+        <item name="android:windowDisablePreview">false</item>
     </style>
 
 </resources>

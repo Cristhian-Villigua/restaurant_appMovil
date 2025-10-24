@@ -6,6 +6,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#0919C8</color>
     <color name="light_gray">#D7D7D7</color>
+    <color name="vibrant_orange">#FF7A00</color>
+
 
     <!-- theme light -->
     <color name="ghost_white">#F8F8FF</color>
