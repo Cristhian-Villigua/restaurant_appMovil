@@ -3,6 +3,7 @@ package com.example.project_mobileapplicacion.admin
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.project_mobileapplicacion.R
@@ -18,6 +19,17 @@ class IndexActivity: AppCompatActivity() {
 
         val userPrefs = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val userEmail = userPrefs.getString("userEmail", null)
+        val btnVerRegister = findViewById<Button>(R.id.btnVerRegister)
+        val btnAdmin = findViewById<Button>(R.id.btnAdmin)
+
+
+        btnVerRegister.setOnClickListener {
+            startActivity(Intent(this, ListActivity::class.java))
+        }
+
+        btnAdmin.setOnClickListener {
+            startActivity(Intent(this, IndexActivity::class.java))
+        }
 
         if (userEmail != null) {
             FirebaseService.getByEmail(userEmail){user->

@@ -7,6 +7,12 @@
     <color name="blue">#0919C8</color>
     <color name="light_gray">#D7D7D7</color>
     <color name="vibrant_orange">#FF7A00</color>
+    <color name="orange">#F0B45D</color>
+    <color name="cream">#EFDEC9</color>
+    <color name="darkGrey">#4E4E4E</color>
+    <color name="lightCream">#FCF0E2</color>
+    <color name="grey">#8D8D8D</color>
+    <color name="darkBrown">#220C01</color>
 
 
     <!-- theme light -->

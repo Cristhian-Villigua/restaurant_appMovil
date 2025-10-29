@@ -17,7 +17,7 @@
             android:id="@+id/txtName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nombre"
+            android:text="@string/Name"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="?attr/colorOnSurface"
@@ -27,7 +27,7 @@
             android:id="@+id/txtDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Detalle"
+            android:text="@string/Detail"
             android:textSize="12sp"
             android:textColor="?attr/colorOnSurface"
             />

@@ -41,5 +41,10 @@
         <!-- Desactiva animaciones mientras carga -->
         <item name="android:windowDisablePreview">false</item>
     </style>
+    
+    <style name="CircleImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">15dp</item>
+    </style>
 
 </resources>

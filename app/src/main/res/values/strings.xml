@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">GourmetGo!</string>
+    <string name="Register">Registrarse</string>
+    <string name="Name">Nombres</string>
+    <string name="Lastname">Apellidos</string>
+    <string name="Birthday">Fecha de nacimiento</string>
+    <string name="Phone">Teléfono</string>
+    <string name="Email">Correo electrónico</string>
+    <string name="Password">Contraseña</string>
+    <string name="Save">Registrar</string>
+    <string name="Account">¿Ya tienes una cuenta?</string>
+    <string name="Login">Inicia sesión</string>
+    <string name="Title_Session">Iniciar sesión</string>
+    <string name="Log_in">Iniciar Sesión</string>
+    <string name="No_account">¿No tienes una cuenta?</string>
+    <string name="Register_pag">Registrate</string>
+    <string name="Guest">Ingresa como invitado</string>
+    <string name="Login_Guest">Invitado</string>
+    <string name="Name_User">Nombre de usuario</string>
+    <string name="Profile">Perfil</string>
+    <string name="Save_Users">Registros</string>
+    <string name="Admin">Administrador</string>
+    <string name="Detail">Detalle</string>
+    <string name="Logout">Cerrar sesión</string>
+    <string name="Update_Profile">Actualizar perfil</string>
+    <string name="Update">Actualizar</string>
+    <string name="Data_Room">Datos Room</string>
+    <string name="Data_Firebase">Datos Firebase</string>
+    <string name="Main_Menu">Menú Principal</string>
+    <string name="Category">Categorías</string>
+    <string name="Popular_dishes">Platos Populares</string>
+    <string name="SeeAll">Ver más</string>
+    <string name="Cart">Carrito</string>
+    <string name="Favorites">Favoritos</string>
+    <string name="My_order">Mi orden</string>
 </resources>
