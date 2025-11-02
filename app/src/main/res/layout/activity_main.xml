@@ -40,19 +40,19 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/Main_Menu"
-                    android:textColor="?attr/colorOnSurface"
+                    android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/logoutIcon"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:clickable="true"
                     android:contentDescription="@string/Profile"
                     android:focusable="true"
                     android:onClick="onProfileClick"
-                    android:src="@drawable/icono" />
+                    android:src="@drawable/ic_user" />
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -91,7 +91,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/Category"
-                android:textColor="@color/black"
+                android:textColor="?attr/colorOnSurface"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -135,7 +135,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/Popular_dishes"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/colorOnSurface"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -143,7 +143,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/SeeAll"
-                    android:textColor="@color/black" />
+                    android:textColor="?attr/colorOnSurface" />
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -206,7 +206,7 @@
                         android:layout_width="22dp"
                         android:layout_height="22dp"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/btn_2" />
+                        app:srcCompat="@drawable/ic_cart" />
 
                     <TextView
                         android:id="@+id/textCar"
@@ -230,7 +230,7 @@
                         android:layout_width="22dp"
                         android:layout_height="22dp"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/btn_3" />
+                        app:srcCompat="@drawable/ic_favorite" />
 
                     <TextView
                         android:id="@+id/textFav"
@@ -254,7 +254,7 @@
                         android:layout_width="22dp"
                         android:layout_height="22dp"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/btn_4" />
+                        app:srcCompat="@drawable/ic_my_order" />
 
                     <TextView
                         android:id="@+id/textView"

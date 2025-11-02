@@ -1,29 +1,46 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.ProjectMobileApplicacion" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Color de la barra de estado -->
-        <!-- <item name="android:statusBarColor">@color/golden_yellow</item> -->
+
+    <!-- Tema base en modo oscuro -->
+    <style name="Base.Theme.ProjectMobileApplicacion" parent="Theme.Material3.Dark.NoActionBar">
+
+        <!-- Colores principales -->
         <item name="colorPrimary">@color/red_primary_dark</item>
         <item name="colorSecondary">@color/red_secondary_dark</item>
-        <!-- Fondo -->
+
+        <!-- Fondo general -->
         <item name="android:windowBackground">@color/black_base</item>
-        <!-- Colores de superficie (cards, EditText, botones) -->
+
+        <!-- Superficies (cards, EditText, etc.) -->
         <item name="colorSurface">@color/black_base</item>
-        <!-- Color de hint en EditText -->
+
+        <!-- Colores de texto y hints -->
         <item name="colorOnSurfaceVariant">@color/light_gray</item>
-        <!-- Color del texto sobre la superficie -->
         <item name="colorOnSurface">@color/white_text</item>
     </style>
 
+    <!-- Tema principal de la app -->
     <style name="Theme.ProjectMobileApplicacion" parent="Base.Theme.ProjectMobileApplicacion" />
-    <style name="SpinnerDatePicker" parent="Theme.AppCompat.Light.Dialog">
+
+    <!-- Estilo del DatePicker (modo oscuro) -->
+    <style name="SpinnerDatePicker" parent="ThemeOverlay.Material3.MaterialAlertDialog">
         <item name="android:datePickerStyle">@style/SpinnerDatePickerStyle</item>
+        <item name="colorPrimary">@color/red_primary_dark</item>
+        <item name="android:textColorPrimary">@color/white_text</item>
+        <item name="android:textColorSecondary">@color/white_text</item>
+        <item name="android:background">@color/black_base</item>
     </style>
 
-    <style name="SpinnerDatePickerStyle" parent="@android:style/Widget.DeviceDefault.DatePicker">
+    <style name="SpinnerDatePickerStyle" parent="android:Widget.Material.DatePicker">
         <item name="android:datePickerMode">spinner</item>
         <item name="android:calendarViewShown">false</item>
         <item name="android:spinnersShown">true</item>
+        <item name="android:background">@color/black_base</item>
+    </style>
+
+    <!-- Estilo para CircleImageView -->
+    <style name="CircleImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">15dp</item>
     </style>
 
 </resources>
