@@ -33,4 +33,10 @@
     <string name="Cart">Carrito</string>
     <string name="Favorites">Favoritos</string>
     <string name="My_order">Mi orden</string>
+    <string name="validation_name">"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZáéíóúÁÉÍÓÚñÑüÜ "</string>
+    <string name="validation_last_name">"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZáéíóúÁÉÍÓÚñÑüÜ "</string>
+    <string name="validation_birthday">"1234567890/"</string>
+    <string name="validation_phone">"1234567890"</string>
+    <string name="validation_email">"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@._-"</string>
+    <string name="validation_password">"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@._-"</string>
 </resources>

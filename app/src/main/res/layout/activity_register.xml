@@ -15,10 +15,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="10dp"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:paddingBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="30dp"
             android:gravity="center"
             android:layout_gravity="center_vertical">
 
@@ -31,7 +31,7 @@
                 android:textStyle="bold"
                 android:textColor="?attr/colorOnSurface"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="5dp" />
+                android:layout_marginBottom="8dp" />
 
             <!-- Logo -->
             <ImageView
@@ -48,7 +48,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_marginTop="-30dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="8dp"
                 android:textColor="?attr/colorOnSurface"
                 android:gravity="center" />
 
@@ -58,7 +58,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="0dp"
                 android:hint="@string/Name"
                 app:startIconDrawable="@drawable/ic_form_user"
                 app:boxStrokeColor="?attr/colorOnSurface"
@@ -70,8 +70,9 @@
                     android:id="@+id/etName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
                     android:textColor="?attr/colorOnSurface"
-                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZáéíóúÁÉÍÓÚñÑüÜ "
+                    android:digits="@string/validation_name"
                     android:maxLength="30"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -95,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:textColor="?attr/colorOnSurface"
-                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZáéíóúÁÉÍÓÚñÑüÜ "
+                    android:digits="@string/validation_last_name"
                     android:maxLength="30"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -117,10 +118,10 @@
                     android:id="@+id/etBirthday"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="date"
                     android:focusable="false"
-                    android:clickable="true"
                     android:textColor="?attr/colorOnSurface"
-                    android:digits="1234567890/"
+                    android:digits="@string/validation_birthday"
                     android:maxLength="10"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -144,7 +145,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="phone"
                     android:textColor="?attr/colorOnSurface"
-                    android:digits="1234567890"
+                    android:digits="@string/validation_phone"
                     android:maxLength="10"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -168,7 +169,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:textColor="?attr/colorOnSurface"
-                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@._-"
+                    android:digits="@string/validation_email"
                     android:maxLength="30"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -193,7 +194,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
                     android:textColor="?attr/colorOnSurface"
-                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@._-"
+                    android:digits="@string/validation_password"
                     android:maxLength="20"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -201,7 +202,7 @@
             <Button
                 android:id="@+id/btnRegister"
                 android:layout_width="150dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:text="@string/Save"
                 android:textStyle="bold"
                 android:textColor="@color/white"
@@ -230,6 +231,7 @@
                     android:text="@string/Login"
                     android:textColor="?attr/colorSecondary"
                     android:clickable="true"
+                    android:focusable="true"
                     android:layout_marginStart="10dp"/>
 
             </LinearLayout>
