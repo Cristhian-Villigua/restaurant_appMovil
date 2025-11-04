@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center">
@@ -7,14 +9,13 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        >
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp"
+            android:padding="20dp"
             android:gravity="center"
             android:layout_gravity="center_vertical" >
 
@@ -49,29 +50,54 @@
                 android:textColor="?attr/colorOnSurface"
                 android:gravity="center" />
 
-            <EditText
-                android:id="@+id/Email"
+            <!-- Correo -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilEmail"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
                 android:hint="@string/Email"
-                android:inputType="textEmailAddress"
-                android:background="@drawable/edit_text_background"
-                android:padding="12dp"
-                android:textColor="?attr/colorOnSurface"
-                android:textSize="16sp"
-                android:layout_marginTop="8dp" />
+                app:startIconDrawable="@drawable/ic_form_email"
+                app:boxStrokeColor="?attr/colorOnSurface"
+                app:hintTextColor="?attr/colorOnSurface"
+                app:counterEnabled="false"
+                app:counterMaxLength="30">
 
-            <EditText
-                android:id="@+id/Password"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:textColor="?attr/colorOnSurface"
+                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@._-"
+                    android:maxLength="30"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Contraseña -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPassword"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
                 android:hint="@string/Password"
-                android:inputType="textPassword"
-                android:background="@drawable/edit_text_background"
-                android:padding="12dp"
-                android:textColor="?attr/colorOnSurface"
-                android:textSize="16sp"
-                android:layout_marginTop="8dp" />
+                app:startIconDrawable="@drawable/ic_form_password"
+                app:endIconMode="password_toggle"
+                app:boxStrokeColor="?attr/colorOnSurface"
+                app:hintTextColor="?attr/colorOnSurface"
+                app:counterEnabled="false"
+                app:counterMaxLength="20">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textColor="?attr/colorOnSurface"
+                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@._-"
+                    android:maxLength="20"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/btnLogin"
@@ -81,14 +107,14 @@
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 android:background="@drawable/button_background"
-                android:layout_marginTop="16dp" />
+                android:layout_marginTop="15dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_marginTop="16dp" >
+                android:layout_marginTop="10dp" >
 
                 <TextView
                     android:id="@+id/textAccount"
@@ -105,7 +131,7 @@
                     android:text="@string/Register_pag"
                     android:textColor="?attr/colorSecondary"
                     android:clickable="true"
-                    android:layout_marginStart="8dp" />
+                    android:layout_marginStart="10dp" />
 
             </LinearLayout>
             <LinearLayout
@@ -113,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_marginTop="8dp" >
+                android:layout_marginTop="10dp" >
                 <TextView
                     android:id="@+id/textGuest"
                     android:layout_width="wrap_content"
@@ -122,14 +148,14 @@
                     android:textColor="?attr/colorOnSurface" />
 
                 <TextView
-                    android:id="@+id/btnGuest"
+                    android:id="@+id/GuestLink"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:focusable="true"
                     android:text="@string/Login_Guest"
                     android:textColor="?attr/colorSecondary"
                     android:clickable="true"
-                    android:layout_marginStart="8dp" />
+                    android:layout_marginStart="10dp" />
 
             </LinearLayout>
         </LinearLayout>

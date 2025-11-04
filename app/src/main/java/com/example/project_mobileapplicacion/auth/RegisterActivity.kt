@@ -5,9 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Patterns
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -17,20 +15,30 @@ import com.example.project_mobileapplicacion.R
 import com.example.project_mobileapplicacion.cloud.FirebaseService
 import com.example.project_mobileapplicacion.database.AppDataBase
 import com.example.project_mobileapplicacion.model.UserEntity
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
 class RegisterActivity : AppCompatActivity() {
-    private lateinit var name: EditText
-    private lateinit var lastname: EditText
-    private lateinit var birthday: EditText
-    private lateinit var phone: EditText
-    private lateinit var email: EditText
-    private lateinit var password: EditText
+
+    private lateinit var tilName: TextInputLayout
+    private lateinit var tilLastname: TextInputLayout
+    private lateinit var tilBirthday: TextInputLayout
+    private lateinit var tilPhone: TextInputLayout
+    private lateinit var tilEmail: TextInputLayout
+    private lateinit var tilPassword: TextInputLayout
+
+    private lateinit var etName: TextInputEditText
+    private lateinit var etLastname: TextInputEditText
+    private lateinit var etBirthday: TextInputEditText
+    private lateinit var etPhone: TextInputEditText
+    private lateinit var etEmail: TextInputEditText
+    private lateinit var etPassword: TextInputEditText
+
     private lateinit var btnRegister: Button
-    private lateinit var tvLoginLink: TextView
+    private lateinit var loginLink: TextView
 
     private var nameTouched = false
     private var lastnameTouched = false
@@ -43,51 +51,117 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        name = findViewById(R.id.Name)
-        lastname = findViewById(R.id.Lastname)
-        birthday = findViewById(R.id.Birthday)
-        phone = findViewById(R.id.Phone)
-        email = findViewById(R.id.Email)
-        password = findViewById(R.id.Password)
+        // Layouts
+        tilName = findViewById(R.id.tilName)
+        tilLastname = findViewById(R.id.tilLastname)
+        tilBirthday = findViewById(R.id.tilBirthday)
+        tilPhone = findViewById(R.id.tilPhone)
+        tilEmail = findViewById(R.id.tilEmail)
+        tilPassword = findViewById(R.id.tilPassword)
+
+        // EditTexts
+        etName = findViewById(R.id.etName)
+        etLastname = findViewById(R.id.etLastname)
+        etBirthday = findViewById(R.id.etBirthday)
+        etPhone = findViewById(R.id.etPhone)
+        etEmail = findViewById(R.id.etEmail)
+        etPassword = findViewById(R.id.etPassword)
+
+        // Botones y links
         btnRegister = findViewById(R.id.btnRegister)
-        tvLoginLink = findViewById(R.id.LoginLink)
+        loginLink = findViewById(R.id.LoginLink)
 
-        birthday.setOnClickListener {
-            showDatePickerDialog(birthday)
-        }
+        // Validación en tiempo real
+        setupRealtimeValidation()
 
-        addValidationListeners(name, lastname, birthday, phone, email, password)
+        // DatePicker
+        etBirthday.setOnClickListener { showDatePickerDialog() }
 
+        // Click para registrar
         btnRegister.setOnClickListener {
-            if (validateForm(name, lastname, birthday, phone, email, password)) {
+            if (validateForm()) {
                 registerUser(
-                    name.text.toString().trim(),
-                    lastname.text.toString().trim(),
-                    birthday.text.toString().trim(),
-                    phone.text.toString().trim(),
-                    email.text.toString().trim(),
-                    password.text.toString()
+                    etName.text.toString().trim(),
+                    etLastname.text.toString().trim(),
+                    etBirthday.text.toString().trim(),
+                    etPhone.text.toString().trim(),
+                    etEmail.text.toString().trim(),
+                    etPassword.text.toString()
                 )
             }
         }
 
-        tvLoginLink.setOnClickListener {
-            val session = Intent(this, LoginActivity::class.java)
-            startActivity(session)
+        // Ir a login
+        loginLink.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
         }
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                startActivity(intent)
-                finish()
+                navigateToLogin()
             }
         })
     }
 
-    private fun showDatePickerDialog(birthday: EditText) {
+    private fun setupRealtimeValidation() {
+        etName.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if (nameTouched) ValidationActivity.validateName(this@RegisterActivity, tilName, s.toString())
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { if (etName.isFocused) nameTouched = true }
+        })
+        etName.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) ValidationActivity.validateName(this, tilName, etName.text.toString()) else nameTouched = true
+        }
+
+        etLastname.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if (lastnameTouched) ValidationActivity.validateLastname(this@RegisterActivity, tilLastname, s.toString())
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { if (etLastname.isFocused) lastnameTouched = true }
+        })
+        etLastname.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) ValidationActivity.validateLastname(this, tilLastname, etLastname.text.toString()) else lastnameTouched = true
+        }
+
+        etBirthday.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus && etBirthday.text?.isNotEmpty() == true && birthdayTouched) {
+                ValidationActivity.validateBirthday(this, tilBirthday, etBirthday.text.toString())
+            } else if (hasFocus) birthdayTouched = true
+        }
+
+        etPhone.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if (phoneTouched) ValidationActivity.validatePhone(this@RegisterActivity, tilPhone, s.toString())
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { if (etPhone.isFocused) phoneTouched = true }
+        })
+        etPhone.setOnFocusChangeListener { _, hasFocus -> if (hasFocus) phoneTouched = true }
+
+        etEmail.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if (emailTouched) ValidationActivity.validateEmail(this@RegisterActivity, tilEmail, s.toString())
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { if (etEmail.isFocused) emailTouched = true }
+        })
+        etEmail.setOnFocusChangeListener { _, hasFocus -> if (hasFocus) emailTouched = true }
+
+        etPassword.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if (passwordTouched) ValidationActivity.validatePassword(this@RegisterActivity, tilPassword, s.toString())
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { if (etPassword.isFocused) passwordTouched = true }
+        })
+        etPassword.setOnFocusChangeListener { _, hasFocus -> if (hasFocus) passwordTouched = true }
+    }
+
+    private fun showDatePickerDialog() {
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH)
@@ -98,7 +172,9 @@ class RegisterActivity : AppCompatActivity() {
             R.style.SpinnerDatePicker,
             { _, selectedYear, selectedMonth, selectedDay ->
                 val formattedDate = String.format(Locale.US, "%02d/%02d/%04d", selectedDay, selectedMonth + 1, selectedYear)
-                birthday.setText(formattedDate)
+                etBirthday.setText(formattedDate)
+                birthdayTouched = true
+                ValidationActivity.validateBirthday(this, tilBirthday, formattedDate)
             },
             year,
             month,
@@ -107,281 +183,14 @@ class RegisterActivity : AppCompatActivity() {
         datePickerDialog.show()
     }
 
-    private fun addValidationListeners(name: EditText, lastname: EditText, birthday: EditText, phone: EditText, email: EditText, password: EditText) {
-        name.setOnFocusChangeListener { _, hasFocus -> if (hasFocus) nameTouched = true }
-        lastname.setOnFocusChangeListener { _, hasFocus -> if (hasFocus) lastnameTouched = true }
-        birthday.setOnFocusChangeListener { _, hasFocus -> if (hasFocus) birthdayTouched = true }
-        phone.setOnFocusChangeListener { _, hasFocus -> if (hasFocus) phoneTouched = true }
-        email.setOnFocusChangeListener { _, hasFocus -> if (hasFocus) emailTouched = true }
-        password.setOnFocusChangeListener { _, hasFocus -> if (hasFocus) passwordTouched = true }
-
-        name.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                if (!nameTouched) {
-                    name.error = null
-                    return
-                }
-
-                if (s.isNullOrBlank()) {
-                    if (!name.isFocused) name.error = "El nombre es requerido"
-                    else name.error = null
-                    return
-                }
-
-                if (s.toString().length < 2 || s.toString().length > 50) {
-                    name.error = "El nombre debe tener entre 2 y 50 caracteres"
-                } else if (!s.toString().matches(Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$"))) {
-                    name.error = "El nombre solo puede contener letras"
-                } else {
-                    name.error = null
-                }
-            }
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { if (name.isFocused) nameTouched = true }
-        })
-
-        lastname.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                if (!lastnameTouched) {
-                    lastname.error = null
-                    return
-                }
-
-                if (s.isNullOrBlank()) {
-                    if (!lastname.isFocused) lastname.error = "El apellido es requerido"
-                    else lastname.error = null
-                    return
-                }
-
-                if (s.toString().length < 2 || s.toString().length > 50) {
-                    lastname.error = "El apellido debe tener entre 2 y 50 caracteres"
-                } else if (!s.toString().matches(Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$"))) {
-                    lastname.error = "El apellido solo puede contener letras"
-                } else {
-                    lastname.error = null
-                }
-            }
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { if (lastname.isFocused) lastnameTouched = true }
-        })
-
-        birthday.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                if (!birthdayTouched) {
-                    birthday.error = null
-                    return
-                }
-
-                if (s.isNullOrBlank()) {
-                    if (!birthday.isFocused) birthday.error = "La fecha de nacimiento es requerida"
-                    else birthday.error = null
-                    return
-                }
-
-                val format = SimpleDateFormat("dd/MM/yyyy", Locale.US)
-                try {
-                    val date = format.parse(s.toString())
-                    if (date != null) {
-                        val calendar = Calendar.getInstance()
-                        calendar.time = date
-                        val year = calendar.get(Calendar.YEAR)
-                        val currentYear = Calendar.getInstance().get(Calendar.YEAR)
-                        if (currentYear - year < 18) {
-                            birthday.error = "Debe ser mayor de 18 años"
-                        } else {
-                            birthday.error = null
-                        }
-                    } else {
-                        birthday.error = "Formato de fecha inválido (dd/MM/yyyy)"
-                    }
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    birthday.error = "Formato de fecha inválido (dd/MM/yyyy)"
-                }
-            }
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { if (birthday.isFocused) birthdayTouched = true }
-        })
-
-        phone.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                if (!phoneTouched) {
-                    phone.error = null
-                    return
-                }
-
-                if (s.isNullOrBlank()) {
-                    if (!phone.isFocused) phone.error = "El teléfono es requerido"
-                    else phone.error = null
-                    return
-                }
-
-                if (s.toString().length != 10) {
-                    phone.error = "El teléfono debe tener 10 dígitos"
-                } else {
-                    phone.error = null
-                }
-            }
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { if (phone.isFocused) phoneTouched = true }
-        })
-
-        email.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                if (!emailTouched) {
-                    email.error = null
-                    return
-                }
-
-                if (s.isNullOrBlank()) {
-                    if (!email.isFocused) email.error = "El correo es requerido"
-                    else email.error = null
-                    return
-                }
-
-                if (s.toString().length > 100) {
-                    email.error = "El correo debe tener máximo 100 caracteres"
-                } else if (!Patterns.EMAIL_ADDRESS.matcher(s.toString()).matches()) {
-                    email.error = "Ingrese un correo válido"
-                } else {
-                    email.error = null
-                }
-            }
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { if (email.isFocused) emailTouched = true }
-        })
-
-        password.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                if (!passwordTouched) {
-                    password.error = null
-                    return
-                }
-
-                if (s.isNullOrBlank()) {
-                    if (!password.isFocused) password.error = "La contraseña es requerida"
-                    else password.error = null
-                    return
-                }
-
-                if (s.toString().length < 8) {
-                    password.error = "La contraseña debe tener al menos 8 caracteres"
-                } else if (s.toString().length > 20) {
-                    password.error = "La contraseña no puede superar 20 caracteres"
-                } else {
-                    password.error = null
-                }
-            }
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { if (password.isFocused) passwordTouched = true }
-        })
-    }
-
-    private fun validateForm(name: EditText, lastname: EditText, birthday: EditText, phone: EditText, email: EditText, password: EditText): Boolean {
+    private fun validateForm(): Boolean {
         var valid = true
-
-        // Nombre
-        val nameText = name.text.toString().trim()
-        if (nameText.isEmpty()) {
-            name.error = "El nombre es requerido"
-            valid = false
-        } else if (nameText.length < 2 || nameText.length > 50) {
-            name.error = "El nombre debe tener entre 2 y 50 caracteres"
-            valid = false
-        } else if (!nameText.matches(Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$"))) {
-            name.error = "El nombre solo puede contener letras"
-            valid = false
-        } else {
-            name.error = null
-        }
-
-        // Apellido
-        val lastnameText = lastname.text.toString().trim()
-        if (lastnameText.isEmpty()) {
-            lastname.error = "El apellido es requerido"
-            valid = false
-        } else if (lastnameText.length < 2 || lastnameText.length > 50) {
-            lastname.error = "El apellido debe tener entre 2 y 50 caracteres"
-            valid = false
-        } else if (!lastnameText.matches(Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$"))) {
-            lastname.error = "El apellido solo puede contener letras"
-            valid = false
-        } else {
-            lastname.error = null
-        }
-
-        // Fecha
-        val birthdayText = birthday.text.toString().trim()
-        if (birthdayText.isEmpty()) {
-            birthday.error = "La fecha de nacimiento es requerida"
-            valid = false
-        } else {
-            val format = SimpleDateFormat("dd/MM/yyyy", Locale.US)
-            try {
-                val date = format.parse(birthdayText)
-                if (date != null) {
-                    val calendar = Calendar.getInstance()
-                    calendar.time = date
-                    val year = calendar.get(Calendar.YEAR)
-                    val currentYear = Calendar.getInstance().get(Calendar.YEAR)
-                    if (currentYear - year < 18) {
-                        birthday.error = "Debe ser mayor de 18 años"
-                        valid = false
-                    } else {
-                        birthday.error = null
-                    }
-                } else {
-                    birthday.error = "Formato de fecha inválido (dd/MM/yyyy)"
-                    valid = false
-                }
-            } catch (e: Exception) {
-                birthday.error = "Formato de fecha inválido (dd/MM/yyyy)"
-                valid = false
-            }
-        }
-
-        // Teléfono
-        val phoneText = phone.text.toString().trim()
-        if (phoneText.isEmpty()) {
-            phone.error = "El teléfono es requerido"
-            valid = false
-        } else if (phoneText.length != 10) {
-            phone.error = "El teléfono debe tener 10 dígitos"
-            valid = false
-        } else {
-            phone.error = null
-        }
-
-        // Email
-        val emailText = email.text.toString().trim()
-        if (emailText.isEmpty()) {
-            email.error = "El correo es requerido"
-            valid = false
-        } else if (emailText.length > 100) {
-            email.error = "El correo debe tener máximo 100 caracteres"
-            valid = false
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches()) {
-            email.error = "Ingrese un correo válido"
-            valid = false
-        } else {
-            email.error = null
-        }
-
-
-        val passwordText = password.text.toString()
-        if (passwordText.isEmpty()) {
-            password.error = "La contraseña es requerida"
-            valid = false
-        } else if (passwordText.length < 8) {
-            password.error = "La contraseña debe tener al menos 8 caracteres"
-            valid = false
-        } else if (passwordText.length > 20) {
-            password.error = "La contraseña no puede superar 20 caracteres"
-            valid = false
-        } else {
-            password.error = null
-        }
-
+        if (!ValidationActivity.validateName(this, tilName, etName.text.toString())) valid = false
+        if (!ValidationActivity.validateLastname(this, tilLastname, etLastname.text.toString())) valid = false
+        if (!ValidationActivity.validateBirthday(this, tilBirthday, etBirthday.text.toString())) valid = false
+        if (!ValidationActivity.validatePhone(this, tilPhone, etPhone.text.toString())) valid = false
+        if (!ValidationActivity.validateEmail(this, tilEmail, etEmail.text.toString())) valid = false
+        if (!ValidationActivity.validatePassword(this, tilPassword, etPassword.text.toString())) valid = false
         if (!valid) Toast.makeText(this, "Por favor, corrija los errores", Toast.LENGTH_SHORT).show()
         return valid
     }
@@ -390,14 +199,8 @@ class RegisterActivity : AppCompatActivity() {
         val db = AppDataBase.getInstance(applicationContext)
         val userDao = db.userDao()
 
-        val userEntity = UserEntity(
-            name = name,
-            lastname = lastname,
-            birthday = birthday,
-            phone = phone,
-            email = email,
-            password = password
-        )
+        val userEntity = UserEntity(name = name, lastname = lastname, birthday = birthday, phone = phone, email = email, password = password)
+
         lifecycleScope.launch {
             try {
                 userDao.insert(userEntity)
@@ -406,34 +209,22 @@ class RegisterActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 Toast.makeText(this@RegisterActivity, "Error al registrar usuario: ${e.message}", Toast.LENGTH_SHORT).show()
             }
-            clear()
-            val session = Intent(this@RegisterActivity, LoginActivity::class.java)
-            startActivity(session)
+            startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+            finish()
         }
-
     }
 
-    private fun clear() {
-        name.setText("")
-        lastname.setText("")
-        birthday.setText("")
-        phone.setText("")
-        email.setText("")
-        password.setText("")
-
-        nameTouched = false
-        lastnameTouched = false
-        birthdayTouched = false
-        phoneTouched = false
-        emailTouched = false
-        passwordTouched = false
+    // Metodo reutilizable para volver al login con boton fisico de atras
+    private fun navigateToLogin() {
+        val intent = Intent(this, LoginActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        }
+        startActivity(intent)
+        finish()
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val intent = Intent(this, LoginActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        startActivity(intent)
-        finish()
+        navigateToLogin()
         return true
     }
 }

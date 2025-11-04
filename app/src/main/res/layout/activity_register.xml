@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center">
@@ -7,17 +9,20 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        >
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp"
+            android:paddingTop="10dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="10dp"
             android:gravity="center"
-            android:layout_gravity="center_vertical" >
+            android:layout_gravity="center_vertical">
 
+            <!-- Título -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -26,11 +31,12 @@
                 android:textStyle="bold"
                 android:textColor="?attr/colorOnSurface"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="12dp" />
+                android:layout_marginBottom="5dp" />
 
+            <!-- Logo -->
             <ImageView
-                android:layout_width="160dp"
-                android:layout_height="140dp"
+                android:layout_width="120dp"
+                android:layout_height="100dp"
                 android:background="@drawable/logo"
                 android:contentDescription="@string/app_name"
                 android:layout_gravity="center_horizontal" />
@@ -39,114 +45,183 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/app_name"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:layout_marginTop="-35dp"
-                android:layout_marginBottom="12dp"
+                android:layout_marginTop="-30dp"
+                android:layout_marginBottom="5dp"
                 android:textColor="?attr/colorOnSurface"
                 android:gravity="center" />
 
-            <EditText
-                android:id="@+id/Name"
+            <!-- Nombre -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilName"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
                 android:hint="@string/Name"
-                android:background="@drawable/edit_text_background"
-                android:padding="12dp"
-                android:textColor="?attr/colorOnSurface"
-                android:textSize="16sp"
-                android:layout_marginTop="8dp"
-                android:singleLine="true"
-                />
+                app:startIconDrawable="@drawable/ic_form_user"
+                app:boxStrokeColor="?attr/colorOnSurface"
+                app:hintTextColor="?attr/colorOnSurface"
+                app:counterEnabled="false"
+                app:counterMaxLength="30">
 
-            <EditText
-                android:id="@+id/Lastname"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/colorOnSurface"
+                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZáéíóúÁÉÍÓÚñÑüÜ "
+                    android:maxLength="30"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Apellido -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilLastname"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
+                android:layout_marginTop="2dp"
                 android:hint="@string/Lastname"
-                android:background="@drawable/edit_text_background"
-                android:padding="12dp"
-                android:textColor="?attr/colorOnSurface"
-                android:textSize="16sp"
-                android:layout_marginTop="8dp"
-                android:singleLine="true" />
+                app:startIconDrawable="@drawable/ic_form_user"
+                app:boxStrokeColor="?attr/colorOnSurface"
+                app:hintTextColor="?attr/colorOnSurface"
+                app:counterEnabled="false"
+                app:counterMaxLength="30">
 
-            <EditText
-                android:id="@+id/Birthday"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etLastname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:textColor="?attr/colorOnSurface"
+                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZáéíóúÁÉÍÓÚñÑüÜ "
+                    android:maxLength="30"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Fecha de nacimiento -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilBirthday"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
                 android:hint="@string/Birthday"
-                android:focusable="false"
-                android:clickable="true"
-                android:background="@drawable/edit_text_background"
-                android:padding="12dp"
-                android:textColor="?attr/colorOnSurface"
-                android:textSize="16sp"
-                android:layout_marginTop="8dp"/>
+                app:startIconDrawable="@drawable/ic_form_calendar"
+                app:boxStrokeColor="?attr/colorOnSurface"
+                app:hintTextColor="?attr/colorOnSurface"
+                app:counterEnabled="false"
+                app:counterMaxLength="10">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etBirthday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:textColor="?attr/colorOnSurface"
+                    android:digits="1234567890/"
+                    android:maxLength="10"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/Phone"
+            <!-- Teléfono -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPhone"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
                 android:hint="@string/Phone"
-                android:inputType="phone"
-                android:background="@drawable/edit_text_background"
-                android:padding="12dp"
-                android:textColor="?attr/colorOnSurface"
-                android:textSize="16sp"
-                android:layout_marginTop="8dp"
-                android:singleLine="true" />
+                app:startIconDrawable="@drawable/ic_form_phone"
+                app:boxStrokeColor="?attr/colorOnSurface"
+                app:hintTextColor="?attr/colorOnSurface"
+                app:counterEnabled="false"
+                app:counterMaxLength="10">
 
-            <EditText
-                android:id="@+id/Email"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:textColor="?attr/colorOnSurface"
+                    android:digits="1234567890"
+                    android:maxLength="10"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Correo -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilEmail"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
                 android:hint="@string/Email"
-                android:inputType="textEmailAddress"
-                android:background="@drawable/edit_text_background"
-                android:padding="12dp"
-                android:textColor="?attr/colorOnSurface"
-                android:textSize="16sp"
-                android:layout_marginTop="8dp"
-                android:singleLine="true" />
+                app:startIconDrawable="@drawable/ic_form_email"
+                app:boxStrokeColor="?attr/colorOnSurface"
+                app:hintTextColor="?attr/colorOnSurface"
+                app:counterEnabled="false"
+                app:counterMaxLength="30">
 
-            <EditText
-                android:id="@+id/Password"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:textColor="?attr/colorOnSurface"
+                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@._-"
+                    android:maxLength="30"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Contraseña -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPassword"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
+                android:layout_marginTop="2dp"
                 android:hint="@string/Password"
-                android:background="@drawable/edit_text_background"
-                android:padding="12dp"
-                android:textColor="?attr/colorOnSurface"
-                android:textSize="16sp"
-                android:layout_marginTop="8dp" />
+                app:startIconDrawable="@drawable/ic_form_password"
+                app:endIconMode="password_toggle"
+                app:boxStrokeColor="?attr/colorOnSurface"
+                app:hintTextColor="?attr/colorOnSurface"
+                app:counterEnabled="false"
+                app:counterMaxLength="20">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textColor="?attr/colorOnSurface"
+                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@._-"
+                    android:maxLength="20"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Botón de registro -->
             <Button
                 android:id="@+id/btnRegister"
-                android:layout_width="match_parent"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="@string/Save"
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 android:background="@drawable/button_background"
-                android:layout_marginTop="16dp" />
+                android:layout_marginTop="10dp"/>
 
+            <!-- Enlace a login -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/textAccount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Account"
-                    android:textColor="?attr/colorOnSurface" />
+                    android:textColor="?attr/colorOnSurface"/>
 
                 <TextView
                     android:id="@+id/LoginLink"
@@ -155,7 +230,7 @@
                     android:text="@string/Login"
                     android:textColor="?attr/colorSecondary"
                     android:clickable="true"
-                    android:layout_marginStart="8dp" />
+                    android:layout_marginStart="10dp"/>
 
             </LinearLayout>
         </LinearLayout>
