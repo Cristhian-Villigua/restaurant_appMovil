@@ -6,6 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/lightCream"
     tools:context=".MainActivity">
 
     <androidx.core.widget.NestedScrollView
@@ -16,7 +17,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="130dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -30,6 +32,7 @@
                     android:id="@+id/logoImage"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginEnd="16dp"
                     android:contentDescription="@string/app_name"
                     android:src="@drawable/logo" />
@@ -41,6 +44,7 @@
                     android:layout_weight="1"
                     android:text="@string/Main_Menu"
                     android:textColor="@color/white"
+                    android:layout_marginTop="15dp"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -48,6 +52,7 @@
                     android:id="@+id/logoutIcon"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:layout_marginTop="15dp"
                     android:clickable="true"
                     android:contentDescription="@string/Profile"
                     android:focusable="true"
@@ -61,16 +66,16 @@
                 android:layout_margin="10dp">
 
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/image"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/banner"
+                    android:layout_width="0dp"
                     android:layout_height="170dp"
                     android:contentDescription="@null"
                     android:scaleType="fitXY"
-                    android:src="@drawable/logo"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:shapeAppearanceOverlay="@style/CircleImageView" />
+                    app:shapeAppearanceOverlay="@style/CircleImageView"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
                 <ProgressBar
                     android:id="@+id/progressBarBanner"
@@ -78,10 +83,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    app:layout_constraintBottom_toBottomOf="@+id/image"
-                    app:layout_constraintEnd_toEndOf="@+id/image"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/image" />
+                    app:layout_constraintTop_toTopOf="@+id/banner" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
@@ -97,7 +102,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:minHeight="50dp">
 
                 <ProgressBar
                     android:id="@+id/progressBarCategory"
@@ -105,7 +111,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    app:layout_constraintBottom_toBottomOf="@+id/recyclerViewCat"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/recyclerViewCat" />
@@ -114,7 +120,9 @@
                     android:id="@+id/recyclerViewCat"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
                     android:clipToPadding="false"
+                    android:minHeight="50dp"
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -148,7 +156,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:minHeight="150dp">
 
                 <ProgressBar
                     android:id="@+id/progressBarPopular"
@@ -156,7 +165,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    app:layout_constraintBottom_toBottomOf="@+id/recyclerViewPopular"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/recyclerViewPopular" />
@@ -169,6 +178,7 @@
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -177,23 +187,23 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/nestedScrollView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        >
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="@color/darkBrown">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="50dp"
                 android:layout_gravity="center_vertical"
-                android:gravity="center"
-                android:padding="10dp">
+                >
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -206,7 +216,8 @@
                         android:layout_width="22dp"
                         android:layout_height="22dp"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/ic_cart" />
+                        app:srcCompat="@drawable/ic_cart"
+                        android:contentDescription="@string/cart"/>
 
                     <TextView
                         android:id="@+id/textCar"
@@ -230,7 +241,8 @@
                         android:layout_width="22dp"
                         android:layout_height="22dp"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/ic_favorite" />
+                        app:srcCompat="@drawable/ic_favorite"
+                        android:contentDescription="@string/Favorites"/>
 
                     <TextView
                         android:id="@+id/textFav"
@@ -254,7 +266,8 @@
                         android:layout_width="22dp"
                         android:layout_height="22dp"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/ic_my_order" />
+                        app:srcCompat="@drawable/ic_my_order"
+                        android:contentDescription="@string/My_order"/>
 
                     <TextView
                         android:id="@+id/textView"

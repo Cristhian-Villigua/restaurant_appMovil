@@ -9,7 +9,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.project_mobileapplicacion.dao.UserDao
 import com.example.project_mobileapplicacion.model.UserEntity
 
-@Database(entities = [UserEntity::class], version = 2, exportSchema = false)
+@Database(entities = [UserEntity::class], version = 3, exportSchema = false)
 abstract class AppDataBase: RoomDatabase() {
     abstract fun userDao(): UserDao
 
@@ -23,6 +23,12 @@ abstract class AppDataBase: RoomDatabase() {
             }
         }
 
+        private val MIGRATION_2_3 = object : Migration(2, 3) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE users ADD COLUMN photoBase64 TEXT NOT NULL DEFAULT ''")
+            }
+        }
+
         fun getInstance(context: Context): AppDataBase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
@@ -30,7 +36,7 @@ abstract class AppDataBase: RoomDatabase() {
                     AppDataBase::class.java,
                     "Project_MobileApplication.db"
                 )
-                    .addMigrations(MIGRATION_1_2)
+                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
                     .build()
                 INSTANCE = instance
                 instance

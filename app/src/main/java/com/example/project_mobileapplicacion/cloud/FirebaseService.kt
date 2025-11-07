@@ -14,7 +14,8 @@ object FirebaseService {
             "birthday" to user.birthday,
             "phone" to user.phone,
             "email" to user.email,
-            "password" to user.password
+            "password" to user.password,
+            "photoBase64" to user.photoBase64
         )
         db.collection("users").add(data).addOnSuccessListener {
             Log.d("FirebaseService","User successfully saved to Firebase")
@@ -33,7 +34,8 @@ object FirebaseService {
                     birthday = doc.getString("birthday") ?: "",
                     phone = doc.getString("phone") ?: "",
                     email = doc.getString("email") ?: "",
-                    password = doc.getString("password") ?: ""
+                    password = doc.getString("password") ?: "",
+                    photoBase64 = doc.getString("photoBase64") ?: ""
                 )
             }
             callback(list)
@@ -58,7 +60,8 @@ object FirebaseService {
                             birthday = document.getString("birthday") ?: "",
                             phone = document.getString("phone") ?: "",
                             email = document.getString("email") ?: "",
-                            password = document.getString("password") ?: ""
+                            password = document.getString("password") ?: "",
+                            photoBase64 = document.getString("photoBase64") ?: ""
                         )
                         callback(user)
                     }
@@ -77,7 +80,8 @@ object FirebaseService {
                     "birthday", user.birthday,
                     "phone", user.phone,
                     "email", user.email,
-                    "password", user.password
+                    "password", user.password,
+                    "photoBase64", user.photoBase64
                 ).addOnSuccessListener {
                     Log.d("FirebaseService", "User successfully updated")
                 }.addOnFailureListener {

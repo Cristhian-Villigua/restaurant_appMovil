@@ -18,6 +18,9 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+    viewBinding {
+        enable = true
+    }
 
     buildTypes {
         release {
@@ -59,6 +62,10 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
     implementation("com.google.firebase:firebase-firestore-ktx")
     implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-database-ktx")
+
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    implementation ("com.google.code.gson:gson:2.10.1")
 
     // lifecycle
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")

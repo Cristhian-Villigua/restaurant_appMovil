@@ -14,5 +14,6 @@ data class UserEntity(
     val birthday: String,
     val phone: String,
     val email: String,
-    val password: String
+    val password: String,
+    val photoBase64: String = ""
 )
