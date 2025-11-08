@@ -209,6 +209,7 @@
                 >
 
                 <LinearLayout
+                    android:id="@+id/btnCart"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -219,8 +220,8 @@
                         android:layout_width="22dp"
                         android:layout_height="22dp"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/ic_cart"
-                        android:contentDescription="@string/Cart"/>
+                        android:contentDescription="@string/Cart"
+                        app:srcCompat="@drawable/ic_cart" />
 
                     <TextView
                         android:id="@+id/textCar"

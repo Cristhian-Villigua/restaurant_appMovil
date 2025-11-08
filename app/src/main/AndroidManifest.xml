@@ -22,6 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectMobileApplicacion">
         <activity
+            android:name=".user.CartActivity"
+            android:exported="false" />
+        <activity
             android:name=".user.ItemsListActivity"
             android:exported="false" />
         <activity

@@ -18,6 +18,7 @@ import com.example.project_mobileapplicacion.adapter.PopularAdapter
 import com.example.project_mobileapplicacion.admin.ProfileActivity
 import com.example.project_mobileapplicacion.cloud.FirebaseService
 import com.example.project_mobileapplicacion.databinding.ActivityMainBinding
+import com.example.project_mobileapplicacion.user.CartActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -35,8 +36,14 @@ class MainActivity : AppCompatActivity() {
         initBanner()
         initCategory()
         initPopular()
+        initBottomMenu()
     }
 
+    private fun initBottomMenu() {
+        binding.btnCart.setOnClickListener {
+            startActivity(Intent(this, CartActivity::class.java))
+        }
+    }
     private fun loadUserImage() {
         val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
         val userEmail = sharedPreferences.getString("userEmail", null)

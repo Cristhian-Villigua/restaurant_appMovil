@@ -43,4 +43,18 @@
     <string name="Back">Volver</string>
     <string name="Photo">Subir foto</string>
     <string name="List">Lista</string>
+    <string name="Enter_Your_Discount_Code">Introduce tu código de descuento</string>
+    <string name="Apply">Aplicar</string>
+    <string name="Pay">$-</string>
+    <string name="Delivery">Entrega</string>
+    <string name="SubTotal">SubTotal</string>
+    <string name="Total_Tax">Impuesto Total</string>
+    <string name="Total">Total</string>
+    <string name="Proceed_To_Checkout">Pager en caja</string>
+    <string name="Remove">remove</string>
+    <string name="Title">title</string>
+    <string name="minus">-</string>
+    <string name="Zero">0</string>
+    <string name="Plus">+</string>
+    <string name="Zero_Price">$0</string>
 </resources>

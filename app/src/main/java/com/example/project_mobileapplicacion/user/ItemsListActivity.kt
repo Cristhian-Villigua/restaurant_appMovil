@@ -4,11 +4,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.project_mobileapplicacion.R
 import com.example.project_mobileapplicacion.adapter.ItemsListCategoryAdapter
 import com.example.project_mobileapplicacion.databinding.ActivityItemsListBinding
 import com.example.project_mobileapplicacion.viewModel.MainViewModel
