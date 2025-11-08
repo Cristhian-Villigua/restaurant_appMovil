@@ -44,12 +44,13 @@
 
                     <TextView
                         android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="6dp"
                         android:layout_weight="1"
-                        android:text="Volver"
-                        android:textColor="@color/darkBrown" />
+                        android:text="@string/Back"
+                        android:textColor="@color/darkBrown"
+                        android:textSize="18sp"/>
 
                 </LinearLayout>
 
@@ -57,7 +58,7 @@
                     android:id="@+id/txtCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Lista"
+                    android:text="@string/List"
                     android:textColor="@color/darkBrown"
                     android:textSize="20sp"
                     android:textStyle="bold"

@@ -39,4 +39,8 @@
     <string name="validation_phone">"1234567890"</string>
     <string name="validation_email">"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@._-"</string>
     <string name="validation_password">"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@._-"</string>
+    <string name="Users">Usuarios</string>
+    <string name="Back">Volver</string>
+    <string name="Photo">Subir foto</string>
+    <string name="List">Lista</string>
 </resources>

@@ -48,16 +48,19 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <ImageView
-                    android:id="@+id/logoutIcon"
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imgUser"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginTop="15dp"
                     android:clickable="true"
                     android:contentDescription="@string/Profile"
                     android:focusable="true"
+                    app:shapeAppearanceOverlay="@style/CircularShapeAppearance"
                     android:onClick="onProfileClick"
-                    android:src="@drawable/ic_user" />
+                    android:scaleType="fitXY"
+                    android:background="@drawable/ic_user"
+                    />
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -217,7 +220,7 @@
                         android:layout_height="22dp"
                         android:layout_gravity="center"
                         app:srcCompat="@drawable/ic_cart"
-                        android:contentDescription="@string/cart"/>
+                        android:contentDescription="@string/Cart"/>
 
                     <TextView
                         android:id="@+id/textCar"

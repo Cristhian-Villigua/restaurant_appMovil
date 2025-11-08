@@ -12,7 +12,7 @@
         android:orientation="horizontal"
         android:padding="16dp"
         android:background="?android:attr/colorPrimary"
-        android:gravity="center_vertical" >
+        android:gravity="center_vertical">
 
         <ImageView
             android:id="@+id/logoImage"
@@ -20,7 +20,7 @@
             android:layout_height="50dp"
             android:background="@drawable/logo"
             android:contentDescription="@string/app_name"
-            android:layout_gravity="center_horizontal" />
+            android:layout_marginTop="15dp"/>
 
         <TextView
             android:id="@+id/userName"
@@ -31,7 +31,8 @@
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@color/white"
-            android:gravity="center" />
+            android:gravity="center"
+            android:layout_marginTop="15dp"/>
 
         <ImageView
             android:id="@+id/logoutIcon"
@@ -40,7 +41,9 @@
             android:src="@drawable/ic_logout"
             android:contentDescription="@string/Logout"
             android:clickable="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:layout_marginTop="15dp"
+            />
 
     </LinearLayout>
     <ScrollView
@@ -48,17 +51,40 @@
         android:layout_height="match_parent"
         android:padding="16dp" >
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="30dp"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:orientation="vertical">
 
-            <!-- Título -->
+            <LinearLayout
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
+                android:orientation="horizontal"
+                android:padding="6dp"
+                android:gravity="start">
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="start"
+                    app:srcCompat="@drawable/back"
+                    android:contentDescription="@string/Back"
+                    app:tint="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:text="@string/Back"
+                    android:textColor="@color/black"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"/>
+            </LinearLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -67,9 +93,18 @@
                 android:textStyle="bold"
                 android:textColor="?attr/colorOnSurface"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10dp" />
+                android:layout_marginBottom="15dp" />
 
-            <!-- Nombre -->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgUser"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:scaleType="fitXY"
+                android:background="@drawable/circle_photo_bg"
+                app:shapeAppearanceOverlay="@style/CircularShapeAppearance"
+                android:layout_gravity="center"
+                android:layout_marginBottom="18dp"/>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/editTilName"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -94,7 +129,6 @@
                     android:enabled="false"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Apellido -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/editTilLastname"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -119,7 +153,6 @@
                     android:enabled="false"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Fecha de nacimiento -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/editTilBirthday"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -145,7 +178,6 @@
                     android:enabled="false" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Teléfono -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/editTilPhone"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -170,7 +202,6 @@
                     android:enabled="false"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Correo -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/editTilEmail"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -203,7 +234,8 @@
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 android:background="@drawable/button_background"
-                android:layout_marginTop="15dp" />
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center"/>
 
         </LinearLayout>
     </ScrollView>

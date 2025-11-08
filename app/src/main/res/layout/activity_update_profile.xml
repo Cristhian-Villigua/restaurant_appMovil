@@ -15,41 +15,6 @@
         android:background="?android:attr/colorPrimary"
         android:gravity="center">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="8dp"
-            android:orientation="horizontal"
-            android:padding="6dp"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="start"
-                app:srcCompat="@drawable/back"
-                android:contentDescription="@string/Back"
-                app:tint="@color/white" />
-
-            <TextView
-                android:id="@+id/btnBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:text="@string/Back"
-                android:textColor="@color/white"
-                android:gravity="center_vertical"
-                android:textSize="16sp"/>
-        </LinearLayout>
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/logo"
-            android:contentDescription="@string/app_name"
-            android:layout_gravity="center_horizontal" />
-
         <TextView
             android:id="@+id/userName"
             android:layout_width="0dp"
@@ -58,19 +23,21 @@
             android:text="@string/app_name"
             android:textSize="24sp"
             android:textStyle="bold"
+            android:layout_marginStart="10sp"
             android:textColor="@color/white"
-            android:gravity="center" />
+            android:gravity="start"
+            android:layout_marginTop="15dp"/>
 
         <ImageView
-            android:id="@+id/logoutIcon"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:src="@drawable/ic_logout"
-            android:contentDescription="@string/Logout"
-            android:clickable="true"
-            android:focusable="true" />
-    </LinearLayout>
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/logo"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/app_name"
+            android:layout_marginTop="15dp"/>
 
+
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -81,6 +48,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
+                android:orientation="horizontal"
+                android:padding="6dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="start"
+                    app:srcCompat="@drawable/back"
+                    android:contentDescription="@string/Back"
+                    app:tint="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:text="@string/Back"
+                    android:textColor="@color/black"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"/>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/txtTitle"
@@ -98,7 +93,7 @@
                 android:layout_width="140dp"
                 android:layout_height="140dp"
                 android:layout_marginTop="16dp"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 android:background="@drawable/circle_photo_bg"
                 app:shapeAppearanceOverlay="@style/CircularShapeAppearance"
                 android:layout_gravity="center"/>
@@ -114,71 +109,137 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_gravity="center" />
 
-            <EditText
-                android:id="@+id/etName"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/editTilName"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
                 android:hint="@string/Name"
-                android:padding="12dp"
-                android:textColor="?attr/colorOnSurface"
-                android:textSize="16sp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/edit_text_background" />
+                app:startIconDrawable="@drawable/ic_form_user"
+                app:boxStrokeColor="?attr/colorOnSurface"
+                app:hintTextColor="?attr/colorOnSurface"
+                app:counterEnabled="false"
+                app:counterMaxLength="30">
 
-            <EditText
-                android:id="@+id/etLastname"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editEtName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:textColor="?attr/colorOnSurface"
+                    android:digits="@string/validation_name"
+                    android:maxLength="30"
+                    android:enabled="false"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/editTilLastname"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:hint="@string/Lastname"
-                android:padding="12dp"
-                android:textColor="?attr/colorOnSurface"
-                android:textSize="16sp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/edit_text_background" />
+                app:startIconDrawable="@drawable/ic_form_user"
+                app:boxStrokeColor="?attr/colorOnSurface"
+                app:hintTextColor="?attr/colorOnSurface"
+                app:counterEnabled="false"
+                app:counterMaxLength="30">
 
-            <EditText
-                android:id="@+id/etBirthday"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editEtLastname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:textColor="?attr/colorOnSurface"
+                    android:digits="@string/validation_last_name"
+                    android:maxLength="30"
+                    android:enabled="false"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/editTilBirthday"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:hint="@string/Birthday"
-                android:padding="12dp"
-                android:textColor="?attr/colorOnSurface"
-                android:textSize="16sp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/edit_text_background" />
+                app:startIconDrawable="@drawable/ic_form_calendar"
+                app:boxStrokeColor="?attr/colorOnSurface"
+                app:hintTextColor="?attr/colorOnSurface"
+                app:counterEnabled="false"
+                app:counterMaxLength="10">
 
-            <EditText
-                android:id="@+id/etPhone"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editEtBirthday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="date"
+                    android:focusable="false"
+                    android:textColor="?attr/colorOnSurface"
+                    android:digits="@string/validation_birthday"
+                    android:maxLength="10"
+                    android:enabled="false" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/editTilPhone"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:hint="@string/Phone"
-                android:padding="12dp"
-                android:textColor="?attr/colorOnSurface"
-                android:textSize="16sp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/edit_text_background" />
+                app:startIconDrawable="@drawable/ic_form_phone"
+                app:boxStrokeColor="?attr/colorOnSurface"
+                app:hintTextColor="?attr/colorOnSurface"
+                app:counterEnabled="false"
+                app:counterMaxLength="10">
 
-            <EditText
-                android:id="@+id/etEmail"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editEtPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:textColor="?attr/colorOnSurface"
+                    android:digits="@string/validation_phone"
+                    android:maxLength="10"
+                    android:enabled="false"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/editTilEmail"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:hint="@string/Email"
-                android:padding="12dp"
-                android:textColor="?attr/colorOnSurface"
-                android:textSize="16sp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/edit_text_background"
-                android:inputType="textEmailAddress" />
+                app:startIconDrawable="@drawable/ic_form_email"
+                app:boxStrokeColor="?attr/colorOnSurface"
+                app:hintTextColor="?attr/colorOnSurface"
+                app:counterEnabled="false"
+                app:counterMaxLength="30">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editEtEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:textColor="?attr/colorOnSurface"
+                    android:digits="@string/validation_email"
+                    android:maxLength="30"
+                    android:enabled="false"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/btnUpdate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
                 android:text="@string/Update"
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 android:background="@drawable/button_background"
-                android:layout_marginTop="16dp" />
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center"/>
 
         </LinearLayout>
     </ScrollView>
