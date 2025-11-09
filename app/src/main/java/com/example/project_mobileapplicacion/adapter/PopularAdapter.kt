@@ -1,14 +1,15 @@
 package com.example.project_mobileapplicacion.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.project_mobileapplicacion.R
 import com.example.project_mobileapplicacion.databinding.ViewholderPopularBinding
 import com.example.project_mobileapplicacion.model.ItemsModel
-import com.example.project_mobileapplicacion.user.DetailActivity
+import com.example.project_mobileapplicacion.user.DetailFragment
 
 class PopularAdapter(val items: MutableList<ItemsModel>): RecyclerView.Adapter<PopularAdapter.ViewHolder>() {
     lateinit var context : Context
@@ -29,12 +30,21 @@ class PopularAdapter(val items: MutableList<ItemsModel>): RecyclerView.Adapter<P
             .into(holder.binding.pic)
 
         holder.itemView.setOnClickListener {
-            val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra("object", items[position])
-            context.startActivity(intent)
+            if (context is AppCompatActivity) {
+                val activity = context as AppCompatActivity
+                val fragment = DetailFragment.newInstance(items[position])
+                activity.supportFragmentManager.beginTransaction()
+                    .setCustomAnimations(
+                        R.anim.slide_in_right,
+                        R.anim.slide_out_left,
+                        R.anim.slide_in_left,
+                        R.anim.slide_out_right
+                    )
+                    .replace(R.id.fragmentContainer, fragment)
+                    .addToBackStack(null)
+                    .commit()
+            }
         }
     }
-
     override fun getItemCount(): Int = items.size
-
 }

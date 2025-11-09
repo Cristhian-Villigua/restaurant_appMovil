@@ -21,12 +21,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectMobileApplicacion">
-        <activity
-            android:name=".user.CartActivity"
-            android:exported="false" />
-        <activity
-            android:name=".user.ItemsListActivity"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".user.CartActivity"-->
+<!--            android:exported="false" />-->
+<!--        <activity-->
+<!--            android:name=".user.ItemsListActivity"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".SplashActivity"
             android:configChanges="uiMode|orientation|screenSize"
@@ -47,15 +47,15 @@
         <activity
             android:name=".admin.IndexActivity"
             android:exported="false" />
-        <activity
-            android:name=".admin.ProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".admin.UpdateProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".user.DetailActivity"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".admin.ProfileActivity"-->
+<!--            android:exported="false" />-->
+<!--        <activity-->
+<!--            android:name=".admin.UpdateProfileActivity"-->
+<!--            android:exported="false" />-->
+<!--        <activity-->
+<!--            android:name=".user.DetailActivity"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".auth.LoginActivity"
             android:exported="false"

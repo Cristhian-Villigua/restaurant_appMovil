@@ -15,8 +15,6 @@ class IndexActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_index)
 
-        userName = findViewById(R.id.userName)
-
         val userPrefs = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val userEmail = userPrefs.getString("userEmail", null)
         val btnVerRegister = findViewById<Button>(R.id.btnVerRegister)
@@ -44,7 +42,7 @@ class IndexActivity: AppCompatActivity() {
         }
     }
     fun onProfileClick(view: android.view.View){
-        val intent = Intent(this, ProfileActivity::class.java)
+        val intent = Intent(this, ProfileFragment::class.java)
         startActivity(intent)
     }
 }

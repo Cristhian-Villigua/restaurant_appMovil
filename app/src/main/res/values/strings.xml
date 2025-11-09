@@ -33,6 +33,10 @@
     <string name="Cart">Carrito</string>
     <string name="Favorites">Favoritos</string>
     <string name="My_order">Mi orden</string>
+    <string name="menu">Menu</string>
+    <string name="search">Búsqueda</string>
+    <string name="history">Historial</string>
+    <string name="edit">Editar</string>
     <string name="validation_name">"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZáéíóúÁÉÍÓÚñÑüÜ "</string>
     <string name="validation_last_name">"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZáéíóúÁÉÍÓÚñÑüÜ "</string>
     <string name="validation_birthday">"1234567890/"</string>

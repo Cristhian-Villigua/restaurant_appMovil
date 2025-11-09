@@ -13,12 +13,12 @@ import com.example.project_mobileapplicacion.helper.ManagmentCart
 import com.example.project_mobileapplicacion.model.ItemsModel
 
 class CartAdapter(private val listItemSelected: ArrayList<ItemsModel>, context: Context,
-    var changeNumberItemsListener: ChangeNumberItemsListener? = null): RecyclerView.Adapter<CartAdapter.Viewholer>() {
+                  var changeNumberItemsListener: ChangeNumberItemsListener? = null): RecyclerView.Adapter<CartAdapter.Viewholer>() {
     class Viewholer(val binding: ViewholderCartBinding): RecyclerView.ViewHolder(binding.root)
     private val managementCart = ManagmentCart(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartAdapter.Viewholer {
-       val binding  = ViewholderCartBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding  = ViewholderCartBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return Viewholer(binding)
     }
 

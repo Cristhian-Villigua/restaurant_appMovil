@@ -1,22 +1,21 @@
 package com.example.project_mobileapplicacion.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.project_mobileapplicacion.databinding.ActivityViewholderCategoryBinding
 import com.example.project_mobileapplicacion.model.CategoryModel
 import com.example.project_mobileapplicacion.R
-import com.example.project_mobileapplicacion.user.ItemsListActivity
+import com.example.project_mobileapplicacion.user.ItemsListFragment
 
 class CategoryAdapter(val items: MutableList<CategoryModel>)
     :RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
-        private lateinit var context: Context
-        private var selectPosition= -1
+    private lateinit var context: Context
+    private var selectPosition= -1
     private var lastSelectedPosition = -1
     inner class ViewHolder(val binding: ActivityViewholderCategoryBinding) : RecyclerView.ViewHolder(binding.root) {
     }
@@ -27,7 +26,7 @@ class CategoryAdapter(val items: MutableList<CategoryModel>)
     }
 
     override fun onBindViewHolder(holder: CategoryAdapter.ViewHolder, position: Int) {
-       val item = items[position]
+        val item = items[position]
         holder.binding.titleCat.text = item.title
         holder.binding.root.setOnClickListener {
             lastSelectedPosition = selectPosition
@@ -36,12 +35,21 @@ class CategoryAdapter(val items: MutableList<CategoryModel>)
             notifyItemChanged(selectPosition)
 
             Handler(Looper.getMainLooper()).postDelayed({
-                val intent = Intent(context, ItemsListActivity::class.java).apply {
-                    putExtra("id", item.id.toString())
-                    putExtra("title", item.title)
+                if (context is AppCompatActivity) {
+                    val activity = context as AppCompatActivity
+                    val fragment = ItemsListFragment.newInstance(item.id.toString(), item.title)
+                    activity.supportFragmentManager.beginTransaction()
+                        .setCustomAnimations(
+                            R.anim.slide_in_right,
+                            R.anim.slide_out_left,
+                            R.anim.slide_in_left,
+                            R.anim.slide_out_right
+                        )
+                        .replace(com.example.project_mobileapplicacion.R.id.fragmentContainer, fragment)
+                        .addToBackStack(null)
+                        .commit()
                 }
-                ContextCompat.startActivity(context,intent,null)
-            },500)
+            }, 500)
         }
         if(selectPosition == position){
             holder.binding.titleCat.setBackgroundResource(R.drawable.dark_brown_bg)
@@ -51,6 +59,5 @@ class CategoryAdapter(val items: MutableList<CategoryModel>)
             holder.binding.titleCat.setTextColor(context.resources.getColor(R.color.darkBrown))
         }
     }
-
     override fun getItemCount(): Int = items.size
 }
