@@ -116,8 +116,10 @@ class UpdateProfileFragment : Fragment() {
     private fun configureTopBar() {
         activity?.let { act ->
             val back = act.findViewById<ImageView>(R.id.btnLeftBarTop)
-            val btnRightHide = act.findViewById<ImageView>(R.id.btnRightBarTop)
+            val btnRight = act.findViewById<ImageView>(R.id.btnRightBarTop)
             val name = act.findViewById<TextView>(R.id.nameBarTop)
+            val tilSearch = act.findViewById<TextInputLayout>(R.id.tilSearch)
+            val etSearch = act.findViewById<TextInputEditText>(R.id.etSearch)
 
             back?.apply {
                 setImageResource(R.drawable.ic_left_arrow)
@@ -127,14 +129,17 @@ class UpdateProfileFragment : Fragment() {
                 setOnClickListener { goBack() }
             }
 
-            btnRightHide?.apply {
+            btnRight?.apply {
                 setImageResource(R.drawable.ic_logout)
                 visibility = View.INVISIBLE
                 isClickable = false
                 isFocusable = false
             }
 
+            name?.visibility = View.VISIBLE
             name?.text = getString(R.string.Profile)
+            tilSearch?.visibility = View.GONE
+            etSearch?.visibility = View.GONE
         }
     }
 

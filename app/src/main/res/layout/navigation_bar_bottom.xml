@@ -71,7 +71,8 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:onClick="onSearchClick">
 
         <ImageView
             android:layout_width="22dp"

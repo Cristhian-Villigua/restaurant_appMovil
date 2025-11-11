@@ -13,6 +13,7 @@ import com.example.project_mobileapplicacion.admin.ProfileFragment
 import com.example.project_mobileapplicacion.cloud.FirebaseService
 import com.example.project_mobileapplicacion.menu.MenuFragment
 import com.example.project_mobileapplicacion.user.CartFragment
+import com.example.project_mobileapplicacion.user.SearchFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var imgUserProfile: ImageView
@@ -39,14 +40,18 @@ class MainActivity : AppCompatActivity() {
     fun onCartClick(view: View){
         supportFragmentManager.commit {
             replace(R.id.fragmentContainer, CartFragment.newInstance())
-            addToBackStack(null)
+        }
+    }
+
+    fun onSearchClick(view: View) {
+        supportFragmentManager.commit {
+            replace(R.id.fragmentContainer, SearchFragment.newInstance())
         }
     }
 
     fun onProfileClick(view: View) {
         supportFragmentManager.commit {
             replace(R.id.fragmentContainer, ProfileFragment.newInstance())
-            addToBackStack(null)
         }
     }
 

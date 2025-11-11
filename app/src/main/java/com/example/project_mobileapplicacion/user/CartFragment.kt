@@ -18,6 +18,8 @@ import com.example.project_mobileapplicacion.helper.ChangeNumberItemsListener
 import com.example.project_mobileapplicacion.helper.ManagmentCart
 import com.example.project_mobileapplicacion.menu.KitchenActivity
 import com.example.project_mobileapplicacion.model.ItemsModel
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -77,22 +79,28 @@ class CartFragment : Fragment() {
 
     private fun configureTopBar() {
         activity?.let { act ->
-            val btnLeftBartTop = act.findViewById<ImageView>(R.id.btnLeftBarTop)
-            val btnRightBarTop = act.findViewById<ImageView>(R.id.btnRightBarTop)
+            val btnLeft = act.findViewById<ImageView>(R.id.btnLeftBarTop)
+            val btnRight = act.findViewById<ImageView>(R.id.btnRightBarTop)
             val name = act.findViewById<TextView>(R.id.nameBarTop)
+            val tilSearch = act.findViewById<TextInputLayout>(R.id.tilSearch)
+            val etSearch = act.findViewById<TextInputEditText>(R.id.etSearch)
 
-            btnLeftBartTop?.apply {
+            btnLeft?.apply {
                 visibility = View.INVISIBLE
                 isClickable = false
                 isFocusable = false
             }
 
-            btnRightBarTop?.apply {
+            btnRight?.apply {
                 visibility = View.INVISIBLE
                 isClickable = false
                 isFocusable = false
             }
+
+            name?.visibility = View.VISIBLE
             name?.text = getString(R.string.Cart)
+            tilSearch?.visibility = View.GONE
+            etSearch?.visibility = View.GONE
         }
     }
 

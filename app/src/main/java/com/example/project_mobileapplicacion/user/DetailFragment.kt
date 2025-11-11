@@ -12,6 +12,8 @@ import com.example.project_mobileapplicacion.R
 import com.example.project_mobileapplicacion.databinding.FragmentDetailBinding
 import com.example.project_mobileapplicacion.helper.ManagmentCart
 import com.example.project_mobileapplicacion.model.ItemsModel
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
 class DetailFragment : Fragment() {
 
@@ -58,6 +60,8 @@ class DetailFragment : Fragment() {
             val btnBack = act.findViewById<ImageView>(R.id.btnLeftBarTop)
             val btnFavorite = act.findViewById<ImageView>(R.id.btnRightBarTop)
             val name = act.findViewById<TextView>(R.id.nameBarTop)
+            val tilSearch = act.findViewById<TextInputLayout>(R.id.tilSearch)
+            val etSearch = act.findViewById<TextInputEditText>(R.id.etSearch)
 
             btnBack?.apply {
                 setImageResource(R.drawable.ic_left_arrow)
@@ -74,7 +78,10 @@ class DetailFragment : Fragment() {
                 isFocusable = false
             }
 
+            name?.visibility = View.VISIBLE
             name?.text = getString(R.string.Detail)
+            tilSearch?.visibility = View.GONE
+            etSearch?.visibility = View.GONE
         }
     }
 

@@ -11,6 +11,36 @@
     android:orientation="horizontal"
     android:padding="16dp">
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilSearch"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="@string/search"
+        android:visibility="gone"
+        android:enabled="false"
+        app:startIconDrawable="@drawable/ic_search"
+        app:boxStrokeColor="@color/white"
+        app:hintTextColor="@color/white"
+        app:boxCornerRadiusTopStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusBottomEnd="20dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:inputType="text"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:digits="@string/validation_name"
+            android:visibility="gone"
+            android:enabled="false"
+            android:maxLength="50"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
     <ImageView
         android:id="@+id/btnLeftBarTop"
         android:layout_width="30dp"

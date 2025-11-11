@@ -15,7 +15,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginHorizontal="30dp"
+            android:gravity="center">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imgUser"
@@ -39,7 +41,11 @@
                 app:boxStrokeColor="?attr/colorOnSurface"
                 app:hintTextColor="?attr/colorOnSurface"
                 app:counterEnabled="false"
-                app:counterMaxLength="30">
+                app:counterMaxLength="30"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editEtName"
@@ -63,7 +69,11 @@
                 app:boxStrokeColor="?attr/colorOnSurface"
                 app:hintTextColor="?attr/colorOnSurface"
                 app:counterEnabled="false"
-                app:counterMaxLength="30">
+                app:counterMaxLength="30"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editEtLastname"
@@ -71,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:textColor="?attr/colorOnSurface"
-                    android:digits="@string/validation_last_name"
+                    android:digits="@string/validation_name"
                     android:maxLength="30"
                     android:enabled="false"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -87,7 +97,11 @@
                 app:boxStrokeColor="?attr/colorOnSurface"
                 app:hintTextColor="?attr/colorOnSurface"
                 app:counterEnabled="false"
-                app:counterMaxLength="10">
+                app:counterMaxLength="10"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editEtBirthday"
@@ -112,7 +126,11 @@
                 app:boxStrokeColor="?attr/colorOnSurface"
                 app:hintTextColor="?attr/colorOnSurface"
                 app:counterEnabled="false"
-                app:counterMaxLength="10">
+                app:counterMaxLength="10"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editEtPhone"
@@ -136,7 +154,11 @@
                 app:boxStrokeColor="?attr/colorOnSurface"
                 app:hintTextColor="?attr/colorOnSurface"
                 app:counterEnabled="false"
-                app:counterMaxLength="30">
+                app:counterMaxLength="30"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editEtEmail"

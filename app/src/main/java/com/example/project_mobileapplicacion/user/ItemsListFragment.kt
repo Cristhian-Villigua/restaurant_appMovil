@@ -13,6 +13,8 @@ import com.example.project_mobileapplicacion.R
 import com.example.project_mobileapplicacion.adapter.ItemsListCategoryAdapter
 import com.example.project_mobileapplicacion.databinding.FragmentItemsListBinding
 import com.example.project_mobileapplicacion.viewModel.MainViewModel
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
 class ItemsListFragment : Fragment() {
 
@@ -62,6 +64,8 @@ class ItemsListFragment : Fragment() {
             val btnBack = act.findViewById<ImageView>(R.id.btnLeftBarTop)
             val btnFavorite = act.findViewById<ImageView>(R.id.btnRightBarTop)
             val name = act.findViewById<TextView>(R.id.nameBarTop)
+            val tilSearch = act.findViewById<TextInputLayout>(R.id.tilSearch)
+            val etSearch = act.findViewById<TextInputEditText>(R.id.etSearch)
 
             btnBack?.apply {
                 setImageResource(R.drawable.ic_left_arrow)
@@ -78,7 +82,10 @@ class ItemsListFragment : Fragment() {
                 isFocusable = false
             }
 
+            name?.visibility = View.VISIBLE
             name?.text = categoryTitle
+            tilSearch?.visibility = View.GONE
+            etSearch?.visibility = View.GONE
         }
     }
 

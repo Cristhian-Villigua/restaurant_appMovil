@@ -38,7 +38,6 @@
     <string name="history">Historial</string>
     <string name="edit">Editar</string>
     <string name="validation_name">"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZáéíóúÁÉÍÓÚñÑüÜ "</string>
-    <string name="validation_last_name">"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZáéíóúÁÉÍÓÚñÑüÜ "</string>
     <string name="validation_birthday">"1234567890/"</string>
     <string name="validation_phone">"1234567890"</string>
     <string name="validation_email">"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@._-"</string>
@@ -62,4 +61,8 @@
     <string name="Plus">+</string>
     <string name="Zero_Price">$0</string>
     <string name="ScanQr">Escanear Qr</string>
+    <string name="no_results_title">No se encontraron resultados</string>
+    <string name="no_results_subtitle">Intenta con otro término de búsqueda</string>
+    <string name="initial_state_title">Busca en el menú</string>
+    <string name="initial_state_subtitle">Escribe para comenzar la búsqueda</string>
 </resources>
