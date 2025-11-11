@@ -54,11 +54,12 @@
     <string name="SubTotal">SubTotal</string>
     <string name="Total_Tax">Impuesto Total</string>
     <string name="Total">Total</string>
-    <string name="Proceed_To_Checkout">Pager en caja</string>
+    <string name="Order">Ordenar</string>
     <string name="Remove">remove</string>
     <string name="Title">title</string>
     <string name="minus">-</string>
     <string name="Zero">0</string>
     <string name="Plus">+</string>
     <string name="Zero_Price">$0</string>
+    <string name="ScanQr">Escanear Qr</string>
 </resources>

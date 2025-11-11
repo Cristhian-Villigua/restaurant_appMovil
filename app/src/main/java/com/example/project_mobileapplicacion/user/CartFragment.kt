@@ -1,11 +1,14 @@
 package com.example.project_mobileapplicacion.user
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.project_mobileapplicacion.R
@@ -13,6 +16,10 @@ import com.example.project_mobileapplicacion.adapter.CartAdapter
 import com.example.project_mobileapplicacion.databinding.FragmentCartBinding
 import com.example.project_mobileapplicacion.helper.ChangeNumberItemsListener
 import com.example.project_mobileapplicacion.helper.ManagmentCart
+import com.example.project_mobileapplicacion.menu.KitchenActivity
+import com.example.project_mobileapplicacion.model.ItemsModel
+import org.json.JSONArray
+import org.json.JSONObject
 
 class CartFragment : Fragment() {
     private var _binding: FragmentCartBinding? = null
@@ -37,6 +44,35 @@ class CartFragment : Fragment() {
         calculateCart()
         initCartList()
         configureTopBar()
+
+        val btnOrder = view.findViewById<Button>(R.id.btnOrder)
+        btnOrder.setOnClickListener {
+            val cartItems: ArrayList<ItemsModel> = managementCart.getListCart()
+            if (cartItems.isEmpty()) {
+                Toast.makeText(requireContext(), "El carrito está vacío", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val jsonArray = JSONArray()
+            for (item in cartItems) {
+                val obj = JSONObject()
+                obj.put("title", item.title)
+                obj.put("description", item.description)
+                val pics = JSONArray()
+                for (url in item.picUrl) pics.put(url)
+                obj.put("picUrl", pics)
+                obj.put("price", item.price)
+                obj.put("rating", item.rating)
+                obj.put("numberInCart", item.numberInCart)
+                obj.put("extra", item.extra)
+                jsonArray.put(obj)
+            }
+
+            val jsonString = jsonArray.toString()
+            val intent = Intent(requireContext(), QrActivity::class.java)
+            intent.putExtra("ORDER_DETAILS", jsonString)
+            startActivity(intent)
+        }
     }
 
     private fun configureTopBar() {

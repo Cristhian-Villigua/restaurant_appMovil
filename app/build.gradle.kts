@@ -68,6 +68,10 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.12.0")
     implementation ("com.google.code.gson:gson:2.10.1")
 
+    //Qr
+    implementation("com.google.zxing:core:3.4.1")
+    //Scan
+    implementation ("com.journeyapps:zxing-android-embedded:4.3.0")
     // lifecycle
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.4")
