@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.project_mobileapplicacion.R
 import com.example.project_mobileapplicacion.cloud.FirebaseService
 import com.example.project_mobileapplicacion.database.AppDataBase
@@ -198,8 +199,18 @@ class RegisterActivity : AppCompatActivity() {
     private fun registerUser(name: String, lastname: String, birthday: String, phone: String, email: String, password: String) {
         val db = AppDataBase.getInstance(applicationContext)
         val userDao = db.userDao()
+        val database = db.openHelper.writableDatabase
+        val roleId = getRoleIdByName(database, "Usuario")
 
-        val userEntity = UserEntity(name = name, lastname = lastname, birthday = birthday, phone = phone, email = email, password = password)
+        val userEntity = UserEntity(
+            name = name,
+            lastname = lastname,
+            birthday = birthday,
+            phone = phone,
+            email = email,
+            password = password,
+            roleId = roleId
+        )
 
         lifecycleScope.launch {
             try {
@@ -213,8 +224,15 @@ class RegisterActivity : AppCompatActivity() {
             finish()
         }
     }
-
-    // Metodo reutilizable para volver al login con boton fisico de atras
+    private fun getRoleIdByName(db: SupportSQLiteDatabase, roleName: String): Int {
+        val cursor = db.query("SELECT id FROM role WHERE role = ?", arrayOf(roleName))
+        cursor.use {
+            if (it.moveToFirst()) {
+                return it.getInt(it.getColumnIndexOrThrow("id"))
+            }
+        }
+        return -1
+    }
     private fun navigateToLogin() {
         val intent = Intent(this, LoginActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)

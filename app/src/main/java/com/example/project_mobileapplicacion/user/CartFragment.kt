@@ -59,12 +59,6 @@ class CartFragment : Fragment() {
             for (item in cartItems) {
                 val obj = JSONObject()
                 obj.put("title", item.title)
-                obj.put("description", item.description)
-                val pics = JSONArray()
-                for (url in item.picUrl) pics.put(url)
-                obj.put("picUrl", pics)
-                obj.put("price", item.price)
-                obj.put("rating", item.rating)
                 obj.put("numberInCart", item.numberInCart)
                 obj.put("extra", item.extra)
                 jsonArray.put(obj)
@@ -134,7 +128,10 @@ class CartFragment : Fragment() {
             txtTotal.text = "$$total"
         }
     }
-
+    override fun onResume() {
+        super.onResume()
+        initCartList()
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

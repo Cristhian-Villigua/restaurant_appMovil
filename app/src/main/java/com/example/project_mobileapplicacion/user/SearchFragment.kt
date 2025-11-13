@@ -80,7 +80,6 @@ class SearchFragment : Fragment() {
         searchTextWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // Verificar que el binding aún existe antes de realizar la búsqueda
                 if (_binding != null) {
                     performSearch(s.toString())
                 }
@@ -92,7 +91,6 @@ class SearchFragment : Fragment() {
             isEnabled = true
             visibility = View.VISIBLE
             setText("")
-            // Agregar el listener
             addTextChangedListener(searchTextWatcher)
         }
     }

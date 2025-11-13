@@ -27,9 +27,6 @@ class KitchenActivity : AppCompatActivity() {
                     for (i in 0 until arr.length()) {
                         val obj = arr.getJSONObject(i)
                         val title = obj.optString("title", "")
-                        val description = obj.optString("description", "")
-                        val price = obj.optDouble("price", 0.0)
-                        val rating = obj.optDouble("rating", 0.0)
                         val numberInCart = obj.optInt("numberInCart", 1)
                         val extra = obj.optString("extra", "")
 
@@ -43,10 +40,6 @@ class KitchenActivity : AppCompatActivity() {
 
                         val item = ItemsModel(
                             title = title,
-                            description = description,
-                            picUrl = pics,
-                            price = price,
-                            rating = rating,
                             numberInCart = numberInCart,
                             extra = extra
                         )

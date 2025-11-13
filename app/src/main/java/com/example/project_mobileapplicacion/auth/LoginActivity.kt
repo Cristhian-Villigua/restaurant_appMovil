@@ -11,6 +11,9 @@ import androidx.core.content.edit
 import androidx.appcompat.app.AppCompatActivity
 import com.example.project_mobileapplicacion.MainActivity
 import com.example.project_mobileapplicacion.R
+import com.example.project_mobileapplicacion.admin.IndexActivity
+import com.example.project_mobileapplicacion.menu.KitchenActivity
+import com.example.project_mobileapplicacion.waiter.ScanQrActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.firestore.FirebaseFirestore
@@ -31,23 +34,19 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        // Layouts
         tilEmail = findViewById(R.id.tilEmail)
         etEmail = findViewById(R.id.etEmail)
 
-        // EditTexts
         tilPassword = findViewById(R.id.tilPassword)
         etPassword = findViewById(R.id.etPassword)
 
-        // Botones y links
         btnLogin = findViewById(R.id.btnLogin)
         registerLink = findViewById(R.id.RegisterLink)
         guestLink = findViewById(R.id.GuestLink)
 
-        // Validación en tiempo real
         setupRealtimeValidation()
+        insertDefaultUsers()
 
-        // Acción de login con validación
         btnLogin.setOnClickListener {
             if (validateForm()) {
                 loginUser(
@@ -57,15 +56,50 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        // Ir a register
         registerLink.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
             finish()
         }
-        // Ir a invitado
         guestLink.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
+    }
+    private fun insertDefaultUsers() {
+        val dbFirestore = FirebaseFirestore.getInstance()
+
+        val adminUser = hashMapOf(
+            "name" to "Admin",
+            "lastname" to "Admin",
+            "birthday" to "1990-01-01",
+            "phone" to "123456789",
+            "email" to "admin@admin.com",
+            "password" to "admin123",
+            "role" to "Administrador"
+        )
+
+        val cocineroUser = hashMapOf(
+            "name" to "Cocinero",
+            "lastname" to "Cocinero",
+            "birthday" to "1995-02-01",
+            "phone" to "987654321",
+            "email" to "cocinero@example.com",
+            "password" to "cocinero123",
+            "role" to "Cocinero"
+        )
+
+        val meseroUser = hashMapOf(
+            "name" to "Mesero",
+            "lastname" to "Mesero",
+            "birthday" to "1992-05-15",
+            "phone" to "555123456",
+            "email" to "mesero@example.com",
+            "password" to "mesero123",
+            "role" to "Mesero"
+        )
+
+        dbFirestore.collection("users").document("admin@admin.com").set(adminUser)
+        dbFirestore.collection("users").document("cocinero@example.com").set(cocineroUser)
+        dbFirestore.collection("users").document("mesero@example.com").set(meseroUser)
     }
 
     private fun setupRealtimeValidation() {
@@ -105,15 +139,30 @@ class LoginActivity : AppCompatActivity() {
                 } else {
                     for (document in documents) {
                         val storedPassword = document.getString("password")
+                        val role = document.getString("role")
                         if (storedPassword == password) {
                             Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
 
                             val userPrefs = getSharedPreferences("UserPrefs", MODE_PRIVATE)
                             userPrefs.edit {
                                 putString("userEmail", email)
+                                putString("userRole", role)
                             }
+                            when (role) {
+                                "Administrador" -> {
+                                    startActivity(Intent(this, IndexActivity::class.java))
+                                }
+                                "Cocinero" -> {
+                                    startActivity(Intent(this, KitchenActivity::class.java))
+                                }
+                                "Mesero" -> {
+                                    startActivity(Intent(this, ScanQrActivity::class.java))
+                                }
+                                "Usuario" -> {
+                                    startActivity(Intent(this, MainActivity::class.java))
+                                }
 
-                            startActivity(Intent(this, MainActivity::class.java))
+                            }
                             finish()
                         } else {
                             Toast.makeText(this, "Contraseña incorrecta", Toast.LENGTH_SHORT).show()

@@ -58,4 +58,13 @@ class ManagmentCart(val context: Context) {
         }
         return fee
     }
+    fun clearCart() {
+        val listItem = getListCart()
+        if (listItem.isNotEmpty()) {
+            tinyDB.putListObject("CartList", arrayListOf<ItemsModel>())
+            Toast.makeText(context, "Orden enviada", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(context, "Tu carrito está vacío, no puedes enviar una orden vacía", Toast.LENGTH_SHORT).show()
+        }
+    }
 }

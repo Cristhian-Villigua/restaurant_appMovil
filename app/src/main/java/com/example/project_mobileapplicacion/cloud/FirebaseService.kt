@@ -15,7 +15,8 @@ object FirebaseService {
             "phone" to user.phone,
             "email" to user.email,
             "password" to user.password,
-            "photoBase64" to user.photoBase64
+            "photoBase64" to user.photoBase64,
+            "roleId" to user.roleId
         )
         db.collection("users").add(data).addOnSuccessListener {
             Log.d("FirebaseService","User successfully saved to Firebase")
@@ -35,7 +36,8 @@ object FirebaseService {
                     phone = doc.getString("phone") ?: "",
                     email = doc.getString("email") ?: "",
                     password = doc.getString("password") ?: "",
-                    photoBase64 = doc.getString("photoBase64") ?: ""
+                    photoBase64 = doc.getString("photoBase64") ?: "",
+                    roleId = doc.getLong("roleId")?.toInt() ?: 0
                 )
             }
             callback(list)
@@ -61,7 +63,8 @@ object FirebaseService {
                             phone = document.getString("phone") ?: "",
                             email = document.getString("email") ?: "",
                             password = document.getString("password") ?: "",
-                            photoBase64 = document.getString("photoBase64") ?: ""
+                            photoBase64 = document.getString("photoBase64") ?: "",
+                            roleId = document.getLong("roleId")?.toInt() ?: 0
                         )
                         callback(user)
                     }
@@ -81,7 +84,8 @@ object FirebaseService {
                     "phone", user.phone,
                     "email", user.email,
                     "password", user.password,
-                    "photoBase64", user.photoBase64
+                    "photoBase64", user.photoBase64,
+                    "roleId", user.roleId
                 ).addOnSuccessListener {
                     Log.d("FirebaseService", "User successfully updated")
                 }.addOnFailureListener {

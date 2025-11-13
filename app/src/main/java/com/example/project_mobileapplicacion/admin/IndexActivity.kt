@@ -10,13 +10,12 @@ import com.example.project_mobileapplicacion.R
 import com.example.project_mobileapplicacion.cloud.FirebaseService
 
 class IndexActivity: AppCompatActivity() {
-    private lateinit var userName: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_index)
 
-        val userPrefs = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
-        val userEmail = userPrefs.getString("userEmail", null)
+        //val userPrefs = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        //val userEmail = userPrefs.getString("userEmail", null)
         val btnVerRegister = findViewById<Button>(R.id.btnVerRegister)
         val btnAdmin = findViewById<Button>(R.id.btnAdmin)
 
@@ -29,7 +28,7 @@ class IndexActivity: AppCompatActivity() {
             startActivity(Intent(this, IndexActivity::class.java))
         }
 
-        if (userEmail != null) {
+        /*if (userEmail != null) {
             FirebaseService.getByEmail(userEmail){user->
                 if(user!=null){
                     userName.text = "Bienvenido, ${user.name} ${user.lastname}"
@@ -39,7 +38,7 @@ class IndexActivity: AppCompatActivity() {
             }
         }else{
             userName.text = "Invitado"
-        }
+        }*/
     }
     fun onProfileClick(view: android.view.View){
         val intent = Intent(this, ProfileFragment::class.java)

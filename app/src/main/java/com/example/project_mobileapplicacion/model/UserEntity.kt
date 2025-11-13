@@ -1,9 +1,19 @@
 package com.example.project_mobileapplicacion.model
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "users")
+@Entity(
+    tableName = "users",
+    foreignKeys = [ForeignKey(
+        entity = RoleEntity::class,
+        parentColumns = arrayOf("id"),
+        childColumns = arrayOf("roleId"),
+        onDelete = ForeignKey.CASCADE
+    )]
+)
 
 data class UserEntity(
     @PrimaryKey(autoGenerate = true)
@@ -15,5 +25,6 @@ data class UserEntity(
     val phone: String,
     val email: String,
     val password: String,
-    val photoBase64: String = ""
+    val photoBase64: String = "",
+    @ColumnInfo(index = true) val roleId: Int
 )
