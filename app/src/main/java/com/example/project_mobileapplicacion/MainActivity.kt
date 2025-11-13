@@ -9,10 +9,12 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import com.bumptech.glide.Glide
+import com.example.project_mobileapplicacion.admin.IndexFragment
 import com.example.project_mobileapplicacion.admin.ProfileFragment
 import com.example.project_mobileapplicacion.cloud.FirebaseService
 import com.example.project_mobileapplicacion.menu.MenuFragment
 import com.example.project_mobileapplicacion.user.CartFragment
+import com.example.project_mobileapplicacion.user.HistoryFragment
 import com.example.project_mobileapplicacion.user.SearchFragment
 
 class MainActivity : AppCompatActivity() {
@@ -23,11 +25,45 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        configureTopBottom()
+        textUserProfile = findViewById(R.id.text_user_profile)
+        imgUserProfile = findViewById(R.id.img_user_profile)
+        imgUserProfile.apply {
+            visibility = View.VISIBLE
+            isClickable = true
+            isFocusable = true
+            loadUserImage(this)
+            setOnClickListener { view ->
+                onProfileClick(view)
+            }
+        }
 
-        // Cargar el fragmento por defecto
-        supportFragmentManager.commit {
-            replace(R.id.fragmentContainer, MenuFragment.newInstance())
+        // Cargar el fragmento inicial según el rol guardado
+        loadDefaultFragment()
+    }
+
+    private fun loadDefaultFragment() {
+        val sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        val userRole = sharedPreferences.getString("userRole", "Usuario")
+
+        when (userRole) {
+            "Administrador" -> {
+                configureBottomBarAdmin()
+                onAdminClick(View(this))
+            }
+            "Cocinero" -> {
+//                supportFragmentManager.commit {
+//                    replace(R.id.fragmentContainer, KitchenFragment.newInstance())
+//                }
+            }
+            "Mesero" -> {
+//                supportFragmentManager.commit {
+//                    replace(R.id.fragmentContainer, OrdersFragment.newInstance())
+//                }
+            }
+            else -> { // Usuario o Invitado
+                configureBottomBarUser()
+                onMenuClick(View(this))
+            }
         }
     }
 
@@ -49,24 +85,91 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun onHistoryClick(view: View) {
+        supportFragmentManager.commit {
+            replace(R.id.fragmentContainer, HistoryFragment.newInstance())
+        }
+    }
+
     fun onProfileClick(view: View) {
         supportFragmentManager.commit {
             replace(R.id.fragmentContainer, ProfileFragment.newInstance())
         }
     }
 
-    private fun configureTopBottom() {
-        imgUserProfile = findViewById(R.id.img_user_profile)
-        textUserProfile = findViewById(R.id.text_user_profile)
+    fun onAdminClick(view: View) {
+        supportFragmentManager.commit {
+            replace(R.id.fragmentContainer, IndexFragment.newInstance())
+        }
+    }
 
-        imgUserProfile.apply {
+    private fun configureBottomBarAdmin() {
+        val itemHome = findViewById<View>(R.id.item_home)
+        val itemCart = findViewById<View>(R.id.item_cart)
+        val itemSearch = findViewById<View>(R.id.item_search)
+        val itemHistory = findViewById<View>(R.id.item_history)
+
+        itemHome?.apply {
             visibility = View.VISIBLE
             isClickable = true
             isFocusable = true
-            loadUserImage(this)
-            setOnClickListener { view ->
-                onProfileClick(view)
-            }
+            setOnClickListener { onAdminClick(this) }
+        }
+
+        itemCart?.apply {
+            visibility = View.GONE
+            isClickable = true
+            isFocusable = true
+            setOnClickListener { onCartClick(this) }
+        }
+
+        itemSearch?.apply {
+            visibility = View.GONE
+            isClickable = true
+            isFocusable = true
+            setOnClickListener { onSearchClick(this) }
+        }
+
+        itemHistory?.apply {
+            visibility = View.GONE
+            isClickable = true
+            isFocusable = true
+            setOnClickListener { onHistoryClick(this) }
+        }
+    }
+
+    private fun configureBottomBarUser() {
+        val itemHome = findViewById<View>(R.id.item_home)
+        val itemCart = findViewById<View>(R.id.item_cart)
+        val itemSearch = findViewById<View>(R.id.item_search)
+        val itemHistory = findViewById<View>(R.id.item_history)
+
+        itemHome?.apply {
+            visibility = View.VISIBLE
+            isClickable = true
+            isFocusable = true
+            setOnClickListener { onMenuClick(this) }
+        }
+
+        itemCart?.apply {
+            visibility = View.VISIBLE
+            isClickable = true
+            isFocusable = true
+            setOnClickListener { onCartClick(this) }
+        }
+
+        itemSearch?.apply {
+            visibility = View.VISIBLE
+            isClickable = true
+            isFocusable = true
+            setOnClickListener { onSearchClick(this) }
+        }
+
+        itemHistory?.apply {
+            visibility = View.VISIBLE
+            isClickable = true
+            isFocusable = true
+            setOnClickListener { onHistoryClick(this) }
         }
     }
 

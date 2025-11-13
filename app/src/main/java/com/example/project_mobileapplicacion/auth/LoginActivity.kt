@@ -11,7 +11,6 @@ import androidx.core.content.edit
 import androidx.appcompat.app.AppCompatActivity
 import com.example.project_mobileapplicacion.MainActivity
 import com.example.project_mobileapplicacion.R
-import com.example.project_mobileapplicacion.admin.IndexActivity
 import com.example.project_mobileapplicacion.menu.KitchenActivity
 import com.example.project_mobileapplicacion.waiter.ScanQrActivity
 import com.google.android.material.textfield.TextInputEditText
@@ -64,6 +63,7 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
         }
     }
+
     private fun insertDefaultUsers() {
         val dbFirestore = FirebaseFirestore.getInstance()
 
@@ -108,7 +108,9 @@ class LoginActivity : AppCompatActivity() {
                 if (emailTouched) ValidationActivity.validateEmail(this@LoginActivity, tilEmail, s.toString())
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { if (etEmail.isFocused) emailTouched = true }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (etEmail.isFocused) emailTouched = true
+            }
         })
         etEmail.setOnFocusChangeListener { _, hasFocus -> if (hasFocus) emailTouched = true }
 
@@ -117,7 +119,9 @@ class LoginActivity : AppCompatActivity() {
                 if (passwordTouched) ValidationActivity.validatePassword(this@LoginActivity, tilPassword, s.toString())
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { if (etPassword.isFocused) passwordTouched = true }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (etPassword.isFocused) passwordTouched = true
+            }
         })
         etPassword.setOnFocusChangeListener { _, hasFocus -> if (hasFocus) passwordTouched = true }
     }
@@ -139,39 +143,49 @@ class LoginActivity : AppCompatActivity() {
                 } else {
                     for (document in documents) {
                         val storedPassword = document.getString("password")
-                        val role = document.getString("role")
-                        if (storedPassword == password) {
-                            Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
+                        val role = document.getString("role") ?: "Usuario"
 
+                        if (storedPassword == password) {
                             val userPrefs = getSharedPreferences("UserPrefs", MODE_PRIVATE)
                             userPrefs.edit {
                                 putString("userEmail", email)
                                 putString("userRole", role)
+                                apply()
                             }
-                            when (role) {
-                                "Administrador" -> {
-                                    startActivity(Intent(this, IndexActivity::class.java))
-                                }
-                                "Cocinero" -> {
-                                    startActivity(Intent(this, KitchenActivity::class.java))
-                                }
-                                "Mesero" -> {
-                                    startActivity(Intent(this, ScanQrActivity::class.java))
-                                }
-                                "Usuario" -> {
-                                    startActivity(Intent(this, MainActivity::class.java))
-                                }
 
-                            }
-                            finish()
+                            Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
+
+                            android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+                                when (role) {
+                                    "Administrador" -> {
+                                        startActivity(Intent(this, MainActivity::class.java))
+                                    }
+                                    "Cocinero" -> {
+                                        startActivity(Intent(this, KitchenActivity::class.java))
+                                    }
+                                    "Mesero" -> {
+                                        startActivity(Intent(this, ScanQrActivity::class.java))
+                                    }
+                                    else -> {
+                                        startActivity(Intent(this, MainActivity::class.java))
+                                    }
+
+                                }
+// No borrar cuando se haya trasformado todo en fragments solo se deja esto ya que se controlara en MainActivity
+//                                val intent = Intent(this, MainActivity::class.java)
+//                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                                startActivity(intent)
+//                                finish()
+                            }, 100)
+
                         } else {
                             Toast.makeText(this, "Contraseña incorrecta", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
             }
-        .addOnFailureListener { exception ->
-            Toast.makeText(this, "Error al iniciar sesión: ${exception.message}", Toast.LENGTH_SHORT).show()
-        }
+            .addOnFailureListener { exception ->
+                Toast.makeText(this, "Error al iniciar sesión: ${exception.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 }

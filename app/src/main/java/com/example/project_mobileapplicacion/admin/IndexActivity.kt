@@ -1,47 +1,89 @@
 package com.example.project_mobileapplicacion.admin
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import com.example.project_mobileapplicacion.R
-import com.example.project_mobileapplicacion.cloud.FirebaseService
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
-class IndexActivity: AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_index)
+class IndexFragment : Fragment() {
 
-        //val userPrefs = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
-        //val userEmail = userPrefs.getString("userEmail", null)
-        val btnVerRegister = findViewById<Button>(R.id.btnVerRegister)
-        val btnAdmin = findViewById<Button>(R.id.btnAdmin)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.activity_index, container, false)
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        configureTopBar()
+
+        super.onViewCreated(view, savedInstanceState)
+        val btnVerRegister = view.findViewById<Button>(R.id.btnVerRegister)
+        val btnAdmin = view.findViewById<Button>(R.id.btnAdmin)
 
         btnVerRegister.setOnClickListener {
-            startActivity(Intent(this, ListActivity::class.java))
+            parentFragmentManager.commit {
+                replace(R.id.fragmentContainer, ListFragment.newInstance())
+                setCustomAnimations(
+                    R.anim.slide_in_right,
+                    R.anim.slide_out_left,
+                    R.anim.slide_in_left,
+                    R.anim.slide_out_right
+                )
+                addToBackStack(null)
+            }
         }
 
         btnAdmin.setOnClickListener {
-            startActivity(Intent(this, IndexActivity::class.java))
-        }
-
-        /*if (userEmail != null) {
-            FirebaseService.getByEmail(userEmail){user->
-                if(user!=null){
-                    userName.text = "Bienvenido, ${user.name} ${user.lastname}"
-                }else{
-                    userName.text = "Usuario no encontrado"
-                }
+            parentFragmentManager.commit {
+                replace(R.id.fragmentContainer, IndexFragment.newInstance())
+                addToBackStack(null)
             }
-        }else{
-            userName.text = "Invitado"
-        }*/
+        }
     }
-    fun onProfileClick(view: android.view.View){
-        val intent = Intent(this, ProfileFragment::class.java)
-        startActivity(intent)
+
+    private fun configureTopBar() {
+        activity?.let { act ->
+            val btnLeft = act.findViewById<ImageView>(R.id.btnLeftBarTop)
+            val btnRight = act.findViewById<ImageView>(R.id.btnRightBarTop)
+            val name = act.findViewById<TextView>(R.id.nameBarTop)
+            val tilSearch = act.findViewById<TextInputLayout>(R.id.tilSearch)
+            val etSearch = act.findViewById<TextInputEditText>(R.id.etSearch)
+
+            btnLeft?.apply {
+                setImageResource(R.drawable.ic_left_arrow)
+                visibility = View.INVISIBLE
+                isClickable = false
+                isFocusable = false
+            }
+
+            btnRight?.apply {
+                setImageResource(R.drawable.ic_left_arrow)
+                visibility = View.INVISIBLE
+                isClickable = false
+                isFocusable = false
+            }
+
+            name?.visibility = View.VISIBLE
+            name?.text = getString(R.string.Admin)
+            tilSearch?.visibility = View.GONE
+            etSearch?.visibility = View.GONE
+        }
+    }
+
+    companion object {
+        fun newInstance(): IndexFragment {
+            return IndexFragment()
+        }
     }
 }

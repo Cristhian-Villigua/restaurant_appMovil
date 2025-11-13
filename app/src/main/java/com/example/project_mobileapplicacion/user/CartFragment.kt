@@ -16,7 +16,6 @@ import com.example.project_mobileapplicacion.adapter.CartAdapter
 import com.example.project_mobileapplicacion.databinding.FragmentCartBinding
 import com.example.project_mobileapplicacion.helper.ChangeNumberItemsListener
 import com.example.project_mobileapplicacion.helper.ManagmentCart
-import com.example.project_mobileapplicacion.menu.KitchenActivity
 import com.example.project_mobileapplicacion.model.ItemsModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
