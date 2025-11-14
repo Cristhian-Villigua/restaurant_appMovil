@@ -11,7 +11,7 @@ import com.example.project_mobileapplicacion.dao.RoleDao
 import com.example.project_mobileapplicacion.model.UserEntity
 import com.example.project_mobileapplicacion.model.RoleEntity
 
-@Database(entities = [UserEntity::class, RoleEntity::class], version = 4, exportSchema = false)
+@Database(entities = [UserEntity::class, RoleEntity::class], version = 5, exportSchema = false)
 abstract class AppDataBase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun roleDao(): RoleDao
@@ -19,6 +19,7 @@ abstract class AppDataBase : RoomDatabase() {
     companion object {
         @Volatile
         private var INSTANCE: AppDataBase? = null
+        private const val DATABASE_NAME = "Project_MobileApplication.db"
 
         val MIGRATION_1_2 = object : Migration(1, 2) {
             override fun migrate(database: SupportSQLiteDatabase) {
@@ -51,14 +52,52 @@ abstract class AppDataBase : RoomDatabase() {
             }
         }
 
+        private val MIGRATION_4_5 = object : Migration(4, 5) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
+                    """
+                    CREATE TABLE IF NOT EXISTS `users_new` (
+                        `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                        `docId` TEXT,
+                        `name` TEXT NOT NULL,
+                        `lastname` TEXT NOT NULL,
+                        `birthday` TEXT NOT NULL,
+                        `phone` TEXT NOT NULL,
+                        `email` TEXT NOT NULL,
+                        `password` TEXT NOT NULL,
+                        `photoBase64` TEXT,
+                        `roleId` INTEGER NOT NULL DEFAULT 5,
+                        FOREIGN KEY(`roleId`) REFERENCES `role`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE
+                    )
+                    """.trimIndent()
+                )
+
+                db.execSQL("CREATE INDEX IF NOT EXISTS `index_users_roleId` ON `users_new` (`roleId`)")
+
+                db.execSQL(
+                    """
+                    INSERT INTO users_new (id, docId, name, lastname, birthday, phone, email, password, photoBase64, roleId)
+                    SELECT id, docId, name, lastname, birthday, phone, email, password, 
+                           CASE WHEN photoBase64 = '' THEN NULL ELSE photoBase64 END,
+                           5
+                    FROM users
+                    """.trimIndent()
+                )
+
+                db.execSQL("DROP TABLE users")
+                db.execSQL("ALTER TABLE users_new RENAME TO users")
+            }
+        }
+
         fun getInstance(context: Context): AppDataBase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDataBase::class.java,
-                    "Project_MobileApplication.db"
+                    DATABASE_NAME
                 )
-                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
+                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
+                    .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance
                 instance

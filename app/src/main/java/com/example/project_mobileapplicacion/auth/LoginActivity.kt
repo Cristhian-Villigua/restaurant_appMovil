@@ -136,52 +136,42 @@ class LoginActivity : AppCompatActivity() {
 
     private fun loginUser(email: String, password: String) {
         val db = FirebaseFirestore.getInstance()
+
         db.collection("users").whereEqualTo("email", email).get()
             .addOnSuccessListener { documents ->
+
                 if (documents.isEmpty) {
                     Toast.makeText(this, "Correo no encontrado", Toast.LENGTH_SHORT).show()
-                } else {
-                    for (document in documents) {
-                        val storedPassword = document.getString("password")
-                        val role = document.getString("role") ?: "Usuario"
+                    return@addOnSuccessListener
+                }
 
-                        if (storedPassword == password) {
-                            val userPrefs = getSharedPreferences("UserPrefs", MODE_PRIVATE)
-                            userPrefs.edit {
-                                putString("userEmail", email)
-                                putString("userRole", role)
-                                apply()
-                            }
+                val document = documents.documents[0]
 
-                            Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
+                val storedPassword = document.getString("password")
+                val role = document.getString("role") ?: "Usuario"
 
-                            android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
-                                when (role) {
-                                    "Administrador" -> {
-                                        startActivity(Intent(this, MainActivity::class.java))
-                                    }
-                                    "Cocinero" -> {
-                                        startActivity(Intent(this, KitchenActivity::class.java))
-                                    }
-                                    "Mesero" -> {
-                                        startActivity(Intent(this, ScanQrActivity::class.java))
-                                    }
-                                    else -> {
-                                        startActivity(Intent(this, MainActivity::class.java))
-                                    }
+                if (storedPassword == password) {
 
-                                }
-// No borrar cuando se haya trasformado todo en fragments solo se deja esto ya que se controlara en MainActivity
-//                                val intent = Intent(this, MainActivity::class.java)
-//                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//                                startActivity(intent)
-//                                finish()
-                            }, 100)
-
-                        } else {
-                            Toast.makeText(this, "Contraseña incorrecta", Toast.LENGTH_SHORT).show()
-                        }
+                    val userPrefs = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+                    userPrefs.edit {
+                        putString("userEmail", email)
+                        putString("userRole", role)
+                        apply()
                     }
+
+                    Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
+
+                    android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+                        when (role) {
+                            "Administrador" -> startActivity(Intent(this, MainActivity::class.java))
+                            "Cocinero" -> startActivity(Intent(this, KitchenActivity::class.java))
+                            "Mesero" -> startActivity(Intent(this, ScanQrActivity::class.java))
+                            else -> startActivity(Intent(this, MainActivity::class.java))
+                        }
+                    }, 100)
+
+                } else {
+                    Toast.makeText(this, "Contraseña incorrecta", Toast.LENGTH_SHORT).show()
                 }
             }
             .addOnFailureListener { exception ->

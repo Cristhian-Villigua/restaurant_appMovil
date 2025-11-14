@@ -3,6 +3,7 @@ package com.example.project_mobileapplicacion.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
 @Entity(
@@ -12,9 +13,9 @@ import androidx.room.PrimaryKey
         parentColumns = arrayOf("id"),
         childColumns = arrayOf("roleId"),
         onDelete = ForeignKey.CASCADE
-    )]
+    )],
+    indices = [Index(value = ["roleId"])]
 )
-
 data class UserEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
@@ -25,6 +26,7 @@ data class UserEntity(
     val phone: String,
     val email: String,
     val password: String,
-    val photoBase64: String = "",
-    @ColumnInfo(index = true) val roleId: Int
+    val photoBase64: String? = null,
+    @ColumnInfo(name = "roleId")
+    val roleId: Int = 5
 )

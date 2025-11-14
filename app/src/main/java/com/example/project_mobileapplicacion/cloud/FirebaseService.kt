@@ -7,6 +7,19 @@ import com.google.firebase.firestore.FirebaseFirestore
 object FirebaseService {
     private val db = FirebaseFirestore.getInstance()
 
+    fun checkEmailExists(email: String, callback: (Boolean) -> Unit) {
+        db.collection("users")
+            .whereEqualTo("email", email)
+            .get()
+            .addOnSuccessListener { documents ->
+                callback(!documents.isEmpty)
+            }
+            .addOnFailureListener { e ->
+                Log.e("FirebaseService", "Error checking email", e)
+                callback(false)
+            }
+    }
+
     fun store(user: UserEntity){
         val data = hashMapOf(
             "name" to user.name,

@@ -223,6 +223,9 @@ object ValidationActivity {
 
     fun validateEmail(context: Context, tilEmail: TextInputLayout, text: String): Boolean {
         val colorError = ContextCompat.getColorStateList(context, R.color.red_primary)!!
+        if (tilEmail.helperText == "Este correo ya está registrado") {
+            return false
+        }
 
         return when {
             text.isEmpty() -> {

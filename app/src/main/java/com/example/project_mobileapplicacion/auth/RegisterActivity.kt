@@ -47,6 +47,7 @@ class RegisterActivity : AppCompatActivity() {
     private var phoneTouched = false
     private var emailTouched = false
     private var passwordTouched = false
+    private var emailExists = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -145,10 +146,26 @@ class RegisterActivity : AppCompatActivity() {
 
         etEmail.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                if (emailTouched) ValidationActivity.validateEmail(this@RegisterActivity, tilEmail, s.toString())
+                val email = s.toString()
+
+                // Primero validación local
+                val isValidLocal = ValidationActivity.validateEmail(
+                    this@RegisterActivity,
+                    tilEmail,
+                    email
+                )
+
+                if (!emailTouched) return
+                if (!isValidLocal) return   // No consultar Firebase si el formato es incorrecto
+
+                // Si el correo es valido, consultar Firebase
+                checkEmailInFirebase(email)
             }
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { if (etEmail.isFocused) emailTouched = true }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (etEmail.isFocused) emailTouched = true
+            }
         })
         etEmail.setOnFocusChangeListener { _, hasFocus -> if (hasFocus) emailTouched = true }
 
@@ -160,6 +177,32 @@ class RegisterActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { if (etPassword.isFocused) passwordTouched = true }
         })
         etPassword.setOnFocusChangeListener { _, hasFocus -> if (hasFocus) passwordTouched = true }
+    }
+
+    private fun checkEmailInFirebase(email: String) {
+        FirebaseService.checkEmailExists(email) { exists ->
+            runOnUiThread {
+
+                emailExists = exists
+
+                if (exists) {
+                    val colorError = getColorStateList(R.color.red_primary)
+                    tilEmail.setBoxStrokeColorStateList(colorError)
+                    tilEmail.helperText = "Este correo ya está registrado"
+                    tilEmail.setHelperTextColor(colorError)
+                    tilEmail.endIconMode = TextInputLayout.END_ICON_CUSTOM
+                    tilEmail.endIconDrawable = getDrawable(R.drawable.ic_form_warning)
+                } else {
+                    val green = getColorStateList(R.color.green_success)
+                    tilEmail.helperText = null
+                    tilEmail.isCounterEnabled = false
+                    tilEmail.setHelperTextColor(green)
+                    tilEmail.setBoxStrokeColorStateList(green)
+                    tilEmail.endIconMode = TextInputLayout.END_ICON_CUSTOM
+                    tilEmail.endIconDrawable = getDrawable(R.drawable.ic_form_check)
+                }
+            }
+        }
     }
 
     private fun showDatePickerDialog() {
@@ -192,6 +235,7 @@ class RegisterActivity : AppCompatActivity() {
         if (!ValidationActivity.validatePhone(this, tilPhone, etPhone.text.toString())) valid = false
         if (!ValidationActivity.validateEmail(this, tilEmail, etEmail.text.toString())) valid = false
         if (!ValidationActivity.validatePassword(this, tilPassword, etPassword.text.toString())) valid = false
+        if (emailExists) valid = false
         if (!valid) Toast.makeText(this, "Por favor, corrija los errores", Toast.LENGTH_SHORT).show()
         return valid
     }
