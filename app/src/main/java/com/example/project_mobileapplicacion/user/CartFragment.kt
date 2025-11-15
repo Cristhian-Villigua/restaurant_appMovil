@@ -115,16 +115,18 @@ class CartFragment : Fragment() {
 
     private fun calculateCart() {
         val percentTax = 0.02
-        val delivery = 15
-        tax = Math.round((managementCart.getTotalFee() * percentTax) * 100) / 100.0
-        val total = Math.round((managementCart.getTotalFee() + tax + delivery) * 100) / 100
-        val itemTotal = Math.round(managementCart.getTotalFee() * 100) / 100
+        tax = (managementCart.getTotalFee() * percentTax)
+        val total = managementCart.getTotalFee() + tax
+        val itemTotal = managementCart.getTotalFee()
+
+        val roundedTax = Math.round(tax * 100) / 100.0
+        val roundedTotal = Math.round(total * 100) / 100.0
+        val roundedItemTotal = Math.round(itemTotal * 100) / 100.0
 
         binding.apply {
-            txtTotalFee.text = "$$itemTotal"
-            txtTotalTax.text = "$$tax"
-            txtDelivery.text = "$$delivery"
-            txtTotal.text = "$$total"
+            txtTotalFee.text = "$$roundedItemTotal"
+            txtTotalTax.text = "$$roundedTax"
+            txtTotal.text = "$$roundedTotal"
         }
     }
     override fun onResume() {

@@ -70,8 +70,8 @@ class LoginActivity : AppCompatActivity() {
         val adminUser = hashMapOf(
             "name" to "Admin",
             "lastname" to "Admin",
-            "birthday" to "1990-01-01",
-            "phone" to "123456789",
+            "birthday" to "01/01/2000",
+            "phone" to "1234567890",
             "email" to "admin@admin.com",
             "password" to "admin123",
             "role" to "Administrador"
@@ -80,8 +80,8 @@ class LoginActivity : AppCompatActivity() {
         val cocineroUser = hashMapOf(
             "name" to "Cocinero",
             "lastname" to "Cocinero",
-            "birthday" to "1995-02-01",
-            "phone" to "987654321",
+            "birthday" to "01/01/20001",
+            "phone" to "9876543210",
             "email" to "cocinero@example.com",
             "password" to "cocinero123",
             "role" to "Cocinero"
@@ -90,8 +90,8 @@ class LoginActivity : AppCompatActivity() {
         val meseroUser = hashMapOf(
             "name" to "Mesero",
             "lastname" to "Mesero",
-            "birthday" to "1992-05-15",
-            "phone" to "555123456",
+            "birthday" to "01/01/2000",
+            "phone" to "5551234560",
             "email" to "mesero@example.com",
             "password" to "mesero123",
             "role" to "Mesero"

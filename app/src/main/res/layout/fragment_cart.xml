@@ -62,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/Delivery"
+                android:text="@string/Total_Tax"
                 android:textColor="@color/darkBrown"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -78,16 +78,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/Total_Tax"
-                android:textColor="@color/darkBrown"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
             <TextView
                 android:id="@+id/txtTotalFee"
@@ -100,7 +90,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/txtDelivery"
+                android:id="@+id/txtTotalTax"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -110,16 +100,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtTotalFee" />
 
-            <TextView
-                android:id="@+id/txtTotalTax"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/Pay"
-                android:textColor="@color/darkBrown"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtDelivery" />
 
             <View
                 android:id="@+id/view3"
@@ -129,7 +109,7 @@
                 android:background="@color/darkBrown"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
             <TextView
                 android:id="@+id/plusEachItem"
