@@ -17,6 +17,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -24,6 +26,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.example.project_mobileapplicacion.MainActivity
 import com.example.project_mobileapplicacion.R
 import com.example.project_mobileapplicacion.auth.ValidationActivity
 import com.example.project_mobileapplicacion.cloud.FirebaseService
@@ -55,6 +58,8 @@ class UpdateProfileFragment : Fragment() {
     private var imageBase64: String? = null
     private val REQUEST_CAMERA = 200
     private val REQUEST_GALLERY = 201
+    private lateinit var progressBar: ProgressBar
+    private lateinit var scrollUpdateProfile: ScrollView
 
     private val takePicture = registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitmap ->
         bitmap?.let {
@@ -90,6 +95,8 @@ class UpdateProfileFragment : Fragment() {
         btnUpdate = view.findViewById(R.id.btnUpdate)
         imgUser = view.findViewById(R.id.imgUser)
         btnAddPhoto = view.findViewById(R.id.btnAddPhoto)
+        progressBar = view.findViewById(R.id.progressBarUpdateProfile)
+        scrollUpdateProfile = view.findViewById(R.id.scrollUpdateProfile)
 
         btnAddPhoto.setOnClickListener { mostrarOpcionesFoto() }
 
@@ -105,12 +112,7 @@ class UpdateProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         configureTopBar()
-        loadUserProfile()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        loadUserProfile()
+        loadUpdateProfileData()
     }
 
     private fun configureTopBar() {
@@ -143,12 +145,16 @@ class UpdateProfileFragment : Fragment() {
         }
     }
 
-    private fun loadUserProfile() {
+    private fun loadUpdateProfileData() {
+        progressBar.visibility = View.VISIBLE
+        scrollUpdateProfile.visibility = View.INVISIBLE
         val sharedPreferences = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val userEmail = sharedPreferences.getString("userEmail", null)
 
         if (userEmail != null) {
             FirebaseService.getByEmail(userEmail) { fetchedUser ->
+                progressBar.visibility = View.GONE
+                scrollUpdateProfile.visibility = View.VISIBLE
                 if (fetchedUser != null) {
                     user = fetchedUser
                     loadUserData(fetchedUser)
@@ -301,14 +307,16 @@ class UpdateProfileFragment : Fragment() {
 
             viewLifecycleOwner.lifecycleScope.launch {
                 FirebaseService.update(updatedUser)
-                val userDao = AppDataBase.getInstance(requireContext()).userDao()
-                userDao.update(updatedUser)
+                //val userDao = AppDataBase.getInstance(requireContext()).userDao()
+                //userDao.update(updatedUser)
 
                 Toast.makeText(
                     requireContext(),
                     "Perfil actualizado correctamente",
                     Toast.LENGTH_SHORT
                 ).show()
+
+                (activity as? MainActivity)?.refreshUserImage()
 
                 goBack()
             }

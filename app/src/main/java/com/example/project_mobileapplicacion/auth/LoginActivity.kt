@@ -11,8 +11,6 @@ import androidx.core.content.edit
 import androidx.appcompat.app.AppCompatActivity
 import com.example.project_mobileapplicacion.MainActivity
 import com.example.project_mobileapplicacion.R
-import com.example.project_mobileapplicacion.menu.KitchenActivity
-import com.example.project_mobileapplicacion.waiter.ScanQrActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.firestore.FirebaseFirestore
@@ -35,10 +33,8 @@ class LoginActivity : AppCompatActivity() {
 
         tilEmail = findViewById(R.id.tilEmail)
         etEmail = findViewById(R.id.etEmail)
-
         tilPassword = findViewById(R.id.tilPassword)
         etPassword = findViewById(R.id.etPassword)
-
         btnLogin = findViewById(R.id.btnLogin)
         registerLink = findViewById(R.id.RegisterLink)
         guestLink = findViewById(R.id.GuestLink)
@@ -80,8 +76,8 @@ class LoginActivity : AppCompatActivity() {
         val cocineroUser = hashMapOf(
             "name" to "Cocinero",
             "lastname" to "Cocinero",
-            "birthday" to "01/01/20001",
-            "phone" to "9876543210",
+            "birthday" to "01/01/2000",
+            "phone" to "1234567890",
             "email" to "cocinero@example.com",
             "password" to "cocinero123",
             "role" to "Cocinero"
@@ -91,7 +87,7 @@ class LoginActivity : AppCompatActivity() {
             "name" to "Mesero",
             "lastname" to "Mesero",
             "birthday" to "01/01/2000",
-            "phone" to "5551234560",
+            "phone" to "1234567890",
             "email" to "mesero@example.com",
             "password" to "mesero123",
             "role" to "Mesero"
@@ -105,8 +101,13 @@ class LoginActivity : AppCompatActivity() {
     private fun setupRealtimeValidation() {
         etEmail.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                if (emailTouched) ValidationActivity.validateEmail(this@LoginActivity, tilEmail, s.toString())
+                if (emailTouched) ValidationActivity.validateEmail(
+                    this@LoginActivity,
+                    tilEmail,
+                    s.toString()
+                )
             }
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (etEmail.isFocused) emailTouched = true
@@ -116,8 +117,13 @@ class LoginActivity : AppCompatActivity() {
 
         etPassword.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                if (passwordTouched) ValidationActivity.validatePassword(this@LoginActivity, tilPassword, s.toString())
+                if (passwordTouched) ValidationActivity.validatePassword(
+                    this@LoginActivity,
+                    tilPassword,
+                    s.toString()
+                )
             }
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (etPassword.isFocused) passwordTouched = true
@@ -128,9 +134,16 @@ class LoginActivity : AppCompatActivity() {
 
     private fun validateForm(): Boolean {
         var valid = true
-        if (!ValidationActivity.validateEmail(this, tilEmail, etEmail.text.toString())) valid = false
-        if (!ValidationActivity.validatePassword(this, tilPassword, etPassword.text.toString())) valid = false
-        if (!valid) Toast.makeText(this, "Por favor, corrija los errores", Toast.LENGTH_SHORT).show()
+        if (!ValidationActivity.validateEmail(this, tilEmail, etEmail.text.toString())) valid =
+            false
+        if (!ValidationActivity.validatePassword(
+                this,
+                tilPassword,
+                etPassword.text.toString()
+            )
+        ) valid = false
+        if (!valid) Toast.makeText(this, "Por favor, corrija los errores", Toast.LENGTH_SHORT)
+            .show()
         return valid
     }
 
@@ -162,12 +175,8 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
 
                     android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
-                        when (role) {
-                            "Administrador" -> startActivity(Intent(this, MainActivity::class.java))
-                            "Cocinero" -> startActivity(Intent(this, KitchenActivity::class.java))
-                            "Mesero" -> startActivity(Intent(this, ScanQrActivity::class.java))
-                            else -> startActivity(Intent(this, MainActivity::class.java))
-                        }
+                        startActivity(Intent(this, MainActivity::class.java))
+                        finish()
                     }, 100)
 
                 } else {
@@ -175,7 +184,11 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
             .addOnFailureListener { exception ->
-                Toast.makeText(this, "Error al iniciar sesión: ${exception.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "Error al iniciar sesión: ${exception.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
     }
 }

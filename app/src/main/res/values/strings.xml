@@ -69,4 +69,6 @@
     <string name="Qr">CodeQr</string>
     <string name="cancel">Cancelar</string>
     <string name="ok">OK</string>
+    <string name="kitchen">Cocina</string>
+    <string name="waiter">Mesero</string>
 </resources>

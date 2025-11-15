@@ -53,33 +53,25 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        // Layouts
         tilName = findViewById(R.id.tilName)
         tilLastname = findViewById(R.id.tilLastname)
         tilBirthday = findViewById(R.id.tilBirthday)
         tilPhone = findViewById(R.id.tilPhone)
         tilEmail = findViewById(R.id.tilEmail)
         tilPassword = findViewById(R.id.tilPassword)
-
-        // EditTexts
         etName = findViewById(R.id.etName)
         etLastname = findViewById(R.id.etLastname)
         etBirthday = findViewById(R.id.etBirthday)
         etPhone = findViewById(R.id.etPhone)
         etEmail = findViewById(R.id.etEmail)
         etPassword = findViewById(R.id.etPassword)
-
-        // Botones y links
         btnRegister = findViewById(R.id.btnRegister)
         loginLink = findViewById(R.id.LoginLink)
 
-        // Validación en tiempo real
         setupRealtimeValidation()
 
-        // DatePicker
         etBirthday.setOnClickListener { showDatePickerDialog() }
 
-        // Click para registrar
         btnRegister.setOnClickListener {
             if (validateForm()) {
                 registerUser(
@@ -93,7 +85,6 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
-        // Ir a login
         loginLink.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
@@ -241,10 +232,10 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun registerUser(name: String, lastname: String, birthday: String, phone: String, email: String, password: String) {
-        val db = AppDataBase.getInstance(applicationContext)
-        val userDao = db.userDao()
-        val database = db.openHelper.writableDatabase
-        val roleId = getRoleIdByName(database, "Usuario")
+        //val db = AppDataBase.getInstance(applicationContext)
+        //val userDao = db.userDao()
+        //val database = db.openHelper.writableDatabase
+        //val roleId = getRoleIdByName(database, "Usuario")
 
         val userEntity = UserEntity(
             name = name,
@@ -253,12 +244,12 @@ class RegisterActivity : AppCompatActivity() {
             phone = phone,
             email = email,
             password = password,
-            roleId = roleId
+            roleId = 4
         )
 
         lifecycleScope.launch {
             try {
-                userDao.insert(userEntity)
+                //userDao.insert(userEntity)
                 FirebaseService.store(userEntity)
                 Toast.makeText(this@RegisterActivity, "Usuario registrado exitosamente", Toast.LENGTH_SHORT).show()
             } catch (e: Exception) {
@@ -268,15 +259,17 @@ class RegisterActivity : AppCompatActivity() {
             finish()
         }
     }
-    private fun getRoleIdByName(db: SupportSQLiteDatabase, roleName: String): Int {
-        val cursor = db.query("SELECT id FROM role WHERE role = ?", arrayOf(roleName))
-        cursor.use {
-            if (it.moveToFirst()) {
-                return it.getInt(it.getColumnIndexOrThrow("id"))
-            }
-        }
-        return -1
-    }
+
+    //private fun getRoleIdByName(db: SupportSQLiteDatabase, roleName: String): Int {
+        //val cursor = db.query("SELECT id FROM role WHERE role = ?", arrayOf(roleName))
+        //cursor.use {
+            //if (it.moveToFirst()) {
+                //return it.getInt(it.getColumnIndexOrThrow("id"))
+            //}
+        //}
+        //return -1
+    //}
+
     private fun navigateToLogin() {
         val intent = Intent(this, LoginActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)

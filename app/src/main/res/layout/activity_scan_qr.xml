@@ -5,16 +5,20 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".waiter.ScanQrActivity">
+    android:background="@color/lightCream"
+    tools:context=".waiter.ScanQrFragment">
 
     <Button
         android:id="@+id/btnScanQR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ScanQr"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="200dp"
-        android:layout_alignParentBottom="true"
-        android:textSize="18sp"/>
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:background="@drawable/button_background"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

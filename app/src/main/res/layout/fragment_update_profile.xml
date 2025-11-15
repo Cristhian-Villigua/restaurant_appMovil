@@ -1,23 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/lightCream">
+
+    <ProgressBar
+        android:id="@+id/progressBarUpdateProfile"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <ScrollView
+        android:id="@+id/scrollUpdateProfile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="16dp"
-        android:paddingBottom="8dp">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginHorizontal="30dp"
-            android:gravity="center">
+            android:layout_marginHorizontal="20dp"
+            android:padding="16dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/white_bg">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imgUser"
@@ -25,7 +42,6 @@
                 android:layout_height="140dp"
                 android:scaleType="fitXY"
                 android:background="@drawable/circle_photo_bg"
-                android:layout_marginTop="16dp"
                 android:layout_gravity="center"
                 app:shapeAppearanceOverlay="@style/CircularShapeAppearance" />
 
@@ -46,8 +62,7 @@
                 android:id="@+id/editTilName"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
+                android:layout_height="50dp"
                 android:hint="@string/Name"
                 app:startIconDrawable="@drawable/ic_form_user"
                 app:boxStrokeColor="?attr/colorOnSurface"
@@ -63,6 +78,7 @@
                     android:id="@+id/editEtName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="0dp"
                     android:inputType="textPersonName"
                     android:textColor="?attr/colorOnSurface"
                     android:digits="@string/validation_name"
@@ -74,8 +90,8 @@
                 android:id="@+id/editTilLastname"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
                 android:hint="@string/Lastname"
                 app:startIconDrawable="@drawable/ic_form_user"
                 app:boxStrokeColor="?attr/colorOnSurface"
@@ -91,6 +107,7 @@
                     android:id="@+id/editEtLastname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="0dp"
                     android:inputType="textPersonName"
                     android:textColor="?attr/colorOnSurface"
                     android:digits="@string/validation_name"
@@ -102,8 +119,8 @@
                 android:id="@+id/editTilBirthday"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
                 android:hint="@string/Birthday"
                 app:startIconDrawable="@drawable/ic_form_calendar"
                 app:boxStrokeColor="?attr/colorOnSurface"
@@ -119,6 +136,7 @@
                     android:id="@+id/editEtBirthday"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="0dp"
                     android:inputType="date"
                     android:focusable="false"
                     android:textColor="?attr/colorOnSurface"
@@ -131,8 +149,8 @@
                 android:id="@+id/editTilPhone"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
                 android:hint="@string/Phone"
                 app:startIconDrawable="@drawable/ic_form_phone"
                 app:boxStrokeColor="?attr/colorOnSurface"
@@ -148,6 +166,7 @@
                     android:id="@+id/editEtPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="0dp"
                     android:inputType="phone"
                     android:textColor="?attr/colorOnSurface"
                     android:digits="@string/validation_phone"
@@ -159,8 +178,8 @@
                 android:id="@+id/editTilEmail"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
                 android:hint="@string/Email"
                 app:startIconDrawable="@drawable/ic_form_email"
                 app:boxStrokeColor="?attr/colorOnSurface"
@@ -176,6 +195,7 @@
                     android:id="@+id/editEtEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="0dp"
                     android:inputType="textEmailAddress"
                     android:textColor="?attr/colorOnSurface"
                     android:digits="@string/validation_email"
@@ -187,13 +207,13 @@
                 android:id="@+id/btnUpdate"
                 android:layout_width="200dp"
                 android:layout_height="50dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/Update"
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 android:background="@drawable/button_background"
-                android:layout_marginTop="10dp"
                 android:layout_gravity="center"/>
 
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

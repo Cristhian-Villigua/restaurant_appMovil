@@ -11,6 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -32,6 +34,8 @@ class ProfileFragment : Fragment() {
     private lateinit var editEtEmail: TextInputEditText
     private lateinit var btnEdit: Button
     private lateinit var imgUser: ImageView
+    private lateinit var progressBar: ProgressBar
+    private lateinit var scrollProfile: ScrollView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,10 +49,10 @@ class ProfileFragment : Fragment() {
         editEtBirthday = view.findViewById(R.id.editEtBirthday)
         editEtPhone = view.findViewById(R.id.editEtPhone)
         editEtEmail = view.findViewById(R.id.editEtEmail)
-        btnEdit = view.findViewById(R.id.btnUpdate)
-
-        btnEdit.text = getString(R.string.edit)
+        btnEdit = view.findViewById(R.id.btnEdit)
         imgUser = view.findViewById(R.id.imgUser)
+        progressBar = view.findViewById(R.id.progressBarProfile)
+        scrollProfile = view.findViewById(R.id.scrollProfile)
 
         btnEdit.setOnClickListener {
             if (user != null) {
@@ -72,11 +76,6 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         configureTopBar()
-        loadProfileData()
-    }
-
-    override fun onResume() {
-        super.onResume()
         loadProfileData()
     }
 
@@ -111,10 +110,14 @@ class ProfileFragment : Fragment() {
     }
 
     private fun loadProfileData() {
+        progressBar.visibility = View.VISIBLE
+        scrollProfile.visibility = View.INVISIBLE
         val sharedPreferences = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val userEmail = sharedPreferences.getString("userEmail", null)
         if (userEmail != null) {
             FirebaseService.getByEmail(userEmail) { fetchedUser ->
+                progressBar.visibility = View.GONE
+                scrollProfile.visibility = View.VISIBLE
                 if (fetchedUser != null) {
                     user = fetchedUser
                     loadUserData(fetchedUser)
@@ -152,6 +155,8 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setAsGuest() {
+        progressBar.visibility = View.GONE
+        scrollProfile.visibility = View.VISIBLE
         editEtName.setText(getString(R.string.Login_Guest))
         editEtLastname.setText("N/A")
         editEtBirthday.setText("N/A")
