@@ -101,8 +101,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onKitchenClick(view: View) {
+        val fragment = supportFragmentManager.findFragmentByTag(KitchenFragment.TAG) as? KitchenFragment
+            ?: KitchenFragment.newInstance()
+
         supportFragmentManager.commit {
-            replace(R.id.fragmentContainer, KitchenFragment.newInstance())
+            replace(R.id.fragmentContainer, fragment, KitchenFragment.TAG)
         }
     }
 
