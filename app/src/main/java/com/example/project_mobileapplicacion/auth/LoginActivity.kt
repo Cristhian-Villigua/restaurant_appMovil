@@ -160,6 +160,8 @@ class LoginActivity : AppCompatActivity() {
 
                 val document = documents.documents[0]
 
+                val userDocId = document.id
+
                 val storedPassword = document.getString("password")
                 val role = document.getString("role") ?: "Usuario"
 
@@ -169,6 +171,11 @@ class LoginActivity : AppCompatActivity() {
                     userPrefs.edit {
                         putString("userEmail", email)
                         putString("userRole", role)
+                        apply()
+                    }
+                    val sessionPrefs = getSharedPreferences("SessionPrefs", MODE_PRIVATE)
+                    sessionPrefs.edit {
+                        putString("CURRENT_USER_DOC_ID", userDocId)
                         apply()
                     }
 

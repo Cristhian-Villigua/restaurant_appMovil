@@ -96,7 +96,7 @@ class MenuFragment : Fragment() {
         viewModel.loadCategory().observe(viewLifecycleOwner) {
             binding.recyclerViewCat.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            binding.recyclerViewCat.adapter = CategoryAdapter(it)
+            binding.recyclerViewCat.adapter = CategoryAdapter(it, this)
             binding.progressBarCategory.visibility = View.GONE
         }
     }
@@ -105,7 +105,7 @@ class MenuFragment : Fragment() {
         binding.progressBarPopular.visibility = View.VISIBLE
         viewModel.loadPopular().observe(viewLifecycleOwner) {
             binding.recyclerViewPopular.layoutManager = GridLayoutManager(requireContext(), 2)
-            binding.recyclerViewPopular.adapter = PopularAdapter(it)
+            binding.recyclerViewPopular.adapter = PopularAdapter(it, this)
             binding.progressBarPopular.visibility = View.GONE
         }
     }

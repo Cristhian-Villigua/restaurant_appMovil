@@ -1,6 +1,5 @@
 package com.example.project_mobileapplicacion.user
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +9,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.project_mobileapplicacion.R
 import com.example.project_mobileapplicacion.adapter.CartAdapter
 import com.example.project_mobileapplicacion.databinding.FragmentCartBinding
 import com.example.project_mobileapplicacion.helper.ChangeNumberItemsListener
-import com.example.project_mobileapplicacion.helper.ManagmentCart
+import com.example.project_mobileapplicacion.helper.CartManager
 import com.example.project_mobileapplicacion.model.ItemsModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -26,7 +26,7 @@ class CartFragment : Fragment() {
     private var _binding: FragmentCartBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var managementCart: ManagmentCart
+    private lateinit var managementCart: CartManager
     private var tax: Double = 0.0
 
     override fun onCreateView(
@@ -41,7 +41,7 @@ class CartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        managementCart = ManagmentCart(requireContext())
+        managementCart = CartManager(requireContext())
         calculateCart()
         initCartList()
         configureTopBar()
@@ -64,9 +64,21 @@ class CartFragment : Fragment() {
             }
 
             val jsonString = jsonArray.toString()
-            val intent = Intent(requireContext(), QrActivity::class.java)
-            intent.putExtra("ORDER_DETAILS", jsonString)
-            startActivity(intent)
+            val qrFragment = QrFragment.newInstance(
+                orderDetails = jsonString,
+                isHistory = false
+            )
+
+            parentFragmentManager.commit {
+                setCustomAnimations(
+                    R.anim.slide_in_right,
+                    R.anim.slide_out_left,
+                    R.anim.slide_in_left,
+                    R.anim.slide_out_right
+                )
+                replace(R.id.fragmentContainer, qrFragment)
+                addToBackStack(null)
+            }
         }
     }
 

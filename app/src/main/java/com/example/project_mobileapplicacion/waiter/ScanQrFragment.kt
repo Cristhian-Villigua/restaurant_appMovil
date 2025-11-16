@@ -31,7 +31,7 @@ class ScanQrFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.activity_scan_qr, container, false)
+        val view = inflater.inflate(R.layout.fragment_scan_qr, container, false)
 
         val btnScanQR = view.findViewById<Button>(R.id.btnScanQR)
 
@@ -118,13 +118,12 @@ class ScanQrFragment : Fragment() {
         if (result != null && result.contents != null) {
             val orderDetails = result.contents
 
-            // Enviar orden con rol en español
             val orderJson = JSONObject()
             orderJson.put("role", "Mesero")
             orderJson.put("order", orderDetails)
             webSocketManager.sendMessage(orderJson.toString())
 
-            Toast.makeText(requireContext(), "Orden enviada", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Orden enviada a cocina", Toast.LENGTH_SHORT).show()
 
             val sharedPref = requireActivity().getSharedPreferences("OrdersPrefs", 0)
             sharedPref.edit().putString("LAST_ORDER", orderDetails).apply()

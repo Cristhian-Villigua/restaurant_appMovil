@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.project_mobileapplicacion.R
 import com.example.project_mobileapplicacion.databinding.FragmentDetailBinding
-import com.example.project_mobileapplicacion.helper.ManagmentCart
+import com.example.project_mobileapplicacion.helper.CartManager
 import com.example.project_mobileapplicacion.model.ItemsModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -21,7 +21,7 @@ class DetailFragment : Fragment() {
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
     private lateinit var item: ItemsModel
-    private lateinit var managementCart: ManagmentCart
+    private lateinit var managementCart: CartManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,7 +34,7 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        managementCart = ManagmentCart(requireContext())
+        managementCart = CartManager(requireContext())
         item = arguments?.getSerializable("object") as? ItemsModel
             ?: throw IllegalArgumentException("Item is required")
         configureTopBar()

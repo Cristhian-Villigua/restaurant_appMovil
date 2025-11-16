@@ -17,7 +17,7 @@ class UserAdapter: ListAdapter<UserEntity, UserAdapter.VH>(Diff()) {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_user, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.viewholder_item_user, parent, false)
         return VH(v)
     }
 

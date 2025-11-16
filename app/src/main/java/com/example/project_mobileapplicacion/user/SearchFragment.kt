@@ -96,7 +96,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = ItemsListCategoryAdapter(searchResults)
+        adapter = ItemsListCategoryAdapter(searchResults, this@SearchFragment)
         binding.rvSearchResults.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = this@SearchFragment.adapter
@@ -179,8 +179,7 @@ class SearchFragment : Fragment() {
             layoutNoResults.visibility = View.GONE
             layoutInitialState.visibility = View.VISIBLE
         }
-        searchResults.clear()
-        adapter.notifyDataSetChanged()
+        adapter.updateItems(emptyList())
     }
 
     private fun showNoResults() {
@@ -190,8 +189,7 @@ class SearchFragment : Fragment() {
             layoutNoResults.visibility = View.VISIBLE
             layoutInitialState.visibility = View.GONE
         }
-        searchResults.clear()
-        adapter.notifyDataSetChanged()
+        adapter.updateItems(emptyList())
     }
 
     private fun showResults(items: List<ItemsModel>) {
@@ -201,9 +199,7 @@ class SearchFragment : Fragment() {
             layoutNoResults.visibility = View.GONE
             layoutInitialState.visibility = View.GONE
         }
-        searchResults.clear()
-        searchResults.addAll(items)
-        adapter.notifyDataSetChanged()
+        adapter.updateItems(items)
     }
 
     override fun onDestroyView() {

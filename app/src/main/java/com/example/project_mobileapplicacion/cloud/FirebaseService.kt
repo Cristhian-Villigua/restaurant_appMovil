@@ -1,6 +1,7 @@
 package com.example.project_mobileapplicacion.cloud
 
 import android.util.Log
+import com.example.project_mobileapplicacion.model.OrderHistoryItem
 import com.example.project_mobileapplicacion.model.UserEntity
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -59,6 +60,7 @@ object FirebaseService {
             callback(emptyList())
         }
     }
+
     fun getByEmail(email: String, callback: (UserEntity?) -> Unit) {
         db.collection("users")
             .whereEqualTo("email", email)
@@ -87,6 +89,7 @@ object FirebaseService {
                 callback(null)
             }
     }
+
     fun update(user: UserEntity) {
         user.docId?.let {
             db.collection("users").document(it)
@@ -106,12 +109,54 @@ object FirebaseService {
                 }
         }
     }
+
     fun delete(userId: String){
         db.collection("users").document(userId).delete()
             .addOnSuccessListener {
                 Log.d("FirebaseService", "User successfully deleted")
             }.addOnFailureListener { e->
                 Log.e("FirebaseService", "Error deleting user", e)
+            }
+    }
+
+    // Guardar orden en Firestore
+    fun storeOrder(userId: String, orderText: String) {
+        val data = hashMapOf(
+            "userId" to userId,
+            "orderText" to orderText,
+            "timestamp" to System.currentTimeMillis()
+        )
+
+        db.collection("orders").add(data)
+            .addOnFailureListener { e ->
+                Log.e("FirebaseService", "Error saving order", e)
+            }
+    }
+
+    // Cargar historial de órdenes por userId
+    fun getOrdersByUserId(userId: String, callback: (List<OrderHistoryItem>) -> Unit) {
+        db.collection("orders")
+            .whereEqualTo("userId", userId)
+            .get()
+            .addOnSuccessListener { documents ->
+                val historyList = documents.mapNotNull { doc ->
+                    val timestamp = doc.getLong("timestamp") ?: return@mapNotNull null
+                    val orderText = doc.getString("orderText") ?: return@mapNotNull null
+
+                    val shortId = timestamp.toString().takeLast(5)
+
+                    OrderHistoryItem(
+                        id = shortId,
+                        orderText = orderText,
+                        timestamp = timestamp
+                    )
+                }.sortedByDescending { it.timestamp }
+
+                callback(historyList)
+            }
+            .addOnFailureListener { e ->
+                Log.e("FirebaseService", "Error getting orders", e)
+                callback(emptyList())
             }
     }
 }

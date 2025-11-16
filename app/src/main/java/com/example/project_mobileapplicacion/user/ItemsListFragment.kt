@@ -93,7 +93,6 @@ class ItemsListFragment : Fragment() {
         arguments?.let { args ->
             categoryId = args.getString(ARG_CATEGORY_ID) ?: ""
             categoryTitle = args.getString(ARG_CATEGORY_TITLE) ?: ""
-//            binding.txtCategory.text = categoryTitle
         }
     }
 
@@ -107,13 +106,9 @@ class ItemsListFragment : Fragment() {
                     LinearLayoutManager.VERTICAL,
                     false
                 )
-                listView.adapter = ItemsListCategoryAdapter(items)
+                listView.adapter = ItemsListCategoryAdapter(items, this@ItemsListFragment)
                 progressBar.visibility = View.GONE
             })
-
-//            btnBack.setOnClickListener {
-//                parentFragmentManager.popBackStack()
-//            }
         }
     }
 }

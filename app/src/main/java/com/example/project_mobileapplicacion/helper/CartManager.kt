@@ -5,7 +5,7 @@ import android.widget.Toast
 import com.example.project_mobileapplicacion.model.ItemsModel
 
 
-class ManagmentCart(val context: Context) {
+class CartManager(val context: Context) {
 
     private val tinyDB = TinyDB(context)
 
@@ -62,7 +62,6 @@ class ManagmentCart(val context: Context) {
         val listItem = getListCart()
         if (listItem.isNotEmpty()) {
             tinyDB.putListObject("CartList", arrayListOf<ItemsModel>())
-            Toast.makeText(context, "Orden enviada", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(context, "Tu carrito está vacío, no puedes enviar una orden vacía", Toast.LENGTH_SHORT).show()
         }

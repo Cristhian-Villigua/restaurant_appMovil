@@ -56,7 +56,7 @@ class ProfileFragment : Fragment() {
 
         btnEdit.setOnClickListener {
             if (user != null) {
-                requireActivity().supportFragmentManager.commit {
+                parentFragmentManager.commit {
                     setCustomAnimations(
                         R.anim.slide_in_right,
                         R.anim.slide_out_left,
@@ -167,9 +167,12 @@ class ProfileFragment : Fragment() {
     }
 
     private fun logoutSession() {
-        val userPrefs = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        val context = requireContext()
+        val sessionPrefs = context.getSharedPreferences("SessionPrefs", Context.MODE_PRIVATE)
+        sessionPrefs.edit().clear().apply()
+        val userPrefs = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         userPrefs.edit().clear().apply()
-        val intent = Intent(requireContext(), LoginActivity::class.java)
+        val intent = Intent(context, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         requireActivity().finish()
